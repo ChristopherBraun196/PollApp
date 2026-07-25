@@ -1,0 +1,30 @@
+// Mulish (Variable Font – deckt alle Stärken ab)
+@font-face {
+  font-family: 'Mulish';
+  src: url('/fonts/Mulish/Mulish-VariableFont_wght.ttf') format('truetype-variations');
+  font-weight: 200 1000;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Mulish';
+  src: url('/fonts/Mulish/Mulish-Italic-VariableFont_wght.ttf') format('truetype-variations');
+  font-weight: 200 1000;
+  font-style: italic;
+}
+
+// Nokora (Variable Font)
+@font-face {
+  font-family: 'Nokora';
+  src: url('/fonts/Nokora/Nokora-VariableFont_wght.ttf') format('truetype-variations');
+  font-weight: 100 900;
+  font-style: normal;
+}
+
+// Nerko One (nur ein Schnitt vorhanden)
+@font-face {
+  font-family: 'Nerko One';
+  src: url('/fonts/Nerko_One/NerkoOne-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}

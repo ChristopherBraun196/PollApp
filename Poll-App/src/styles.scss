@@ -1,1 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+@use 'styles/fonts';
+@use 'styles/variables' as *;
+
+body {
+  background-color: $color-primary-purple;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding-inline: 5rem;
+}
+
+button {
+  cursor: pointer;
+}
