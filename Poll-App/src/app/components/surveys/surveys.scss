@@ -1,0 +1,220 @@
+@use '../../../styles/variables' as *;
+
+.section-two {
+  padding-inline: 180px;
+  h2 {
+    color: $color-primary-orange;
+    font-family: $font-heading;
+    font-size: 4.5rem;
+    text-align: center;
+    padding-top: 70px;
+  }
+
+  p {
+    color: #ffffff;
+    font-size: 26px;
+    font-family: 'Mulish';
+    font-weight: 200;
+  }
+
+  .ending-surveys {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .survey-card {
+    padding-left: 24px;
+    display: flex;
+    flex-direction: column;
+    background-color: #faf5fe;
+    height: 300px;
+    width: 300px;
+    border-radius: 0 60px 0 0;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #f4e9fb;
+    }
+
+    .span-category {
+      color: $color-primary-purple;
+      padding-left: 24px;
+      padding-top: 34px;
+      font-family: 'Mulish';
+      font-size: 14px;
+    }
+
+    h3 {
+      color: $color-primary-purple;
+      padding-left: 24px;
+      font-family: 'Mulish';
+      font-weight: bold;
+      font-size: 28px;
+      max-width: 250px;
+      justify-content: flex-end;
+      align-items: center;
+      margin-top: 8px;
+    }
+
+    .span-deadline {
+      align-self: flex-start;
+      margin-top: auto;
+      color: $color-primary-purple;
+      font-family: 'Mulish';
+      font-size: 14px;
+      padding: 4px 6px;
+      border-top-right-radius: 14px;
+      background-color: $color-button-secondary-orange;
+      margin-bottom: 24px;
+    }
+  }
+}
+.section-three {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 40px;
+
+  .filter-buttons {
+    display: flex;
+    gap: 12px;
+    padding-left: 180px;
+
+    button {
+      border: none;
+      border-radius: 20px;
+      padding: 8px 20px;
+      font-family: 'Mulish';
+      font-weight: 700;
+      font-size: 16px;
+      color: $color-primary-purple;
+      cursor: pointer;
+      background-color: #fee9d4;
+
+      &:first-child {
+        background-color: $color-primary-orange;
+      }
+
+      &:not(:first-child):hover {
+        background-color: #ffcfa1;
+      }
+    }
+  }
+}
+.sort-dropdown {
+  position: relative;
+  .sort-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    border: none;
+    border-radius: 12px;
+    padding: 10px 16px;
+    color: #ffffff;
+    font-family: 'Mulish';
+    font-weight: 700;
+    font-size: 16px;
+    margin-right: 180px;
+
+    &:hover {
+      background-color: #d9d9d91f;
+    }
+
+    .arrow-wrapper {
+      position: relative;
+      width: 15px;
+      height: 8px;
+      display: inline-block;
+    }
+
+    .arrow-wrapper img {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .arrow-hover {
+      opacity: 0;
+    }
+
+    &:hover .arrow-default {
+      opacity: 0;
+    }
+
+    &:hover .arrow-hover {
+      opacity: 1;
+    }
+  }
+  .sort-list {
+    display: none;
+    list-style: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 8px;
+    padding: 12px 0;
+    background-color: #ffffff;
+    border-radius: 12px;
+    min-width: 220px;
+
+    li {
+      padding: 10px 20px;
+      color: $color-primary-purple;
+      font-family: 'Mulish';
+      cursor: pointer;
+    }
+  }
+}
+
+.section-four {
+  padding-inline: 180px;
+  margin-top: 40px;
+
+  .survey-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    // max-width: 92%;
+  }
+
+  .list-card {
+    background-color: #d9d9d914;
+    border-radius: 0 60px 0 0;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    min-height: 80px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #d9d9d929;
+    }
+
+    .span-category {
+      color: $color-primary-orange;
+      font-family: 'Mulish';
+      font-size: 14px;
+    }
+
+    h3 {
+      color: #ffffff;
+      font-family: 'Mulish';
+      font-weight: bold;
+      font-size: 24px;
+      margin: 8px 0;
+    }
+
+    .span-deadline {
+      align-self: flex-end;
+      margin-top: auto;
+      padding: 4px 6px;
+      border-top-right-radius: 14px;
+      background-color: $color-button-secondary-orange;
+      color: $color-primary-purple;
+      font-family: 'Mulish';
+      font-size: 14px;
+    }
+  }
+}

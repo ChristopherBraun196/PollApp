@@ -1,0 +1,104 @@
+@use '../../../styles/variables' as *;
+
+.section-one {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 220px;
+}
+
+.collect-feedback {
+  margin-top: 3rem;
+
+  p {
+    color: #ffffff;
+    font-family: 'Mulish';
+    font-size: 20px;
+    max-width: 570px;
+  }
+}
+
+h1 {
+  color: $color-primary-orange;
+  font-family: $font-heading;
+  line-height: 0.9;
+
+  span {
+    display: block;
+    font-size: 6rem;
+  }
+}
+
+.n-survey {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 20px;
+  height: 42px;
+  background-color: $color-button-secondary-orange;
+  font-size: 16px;
+  font-family: 'Mulish';
+  font-weight: 700;
+  color: #221227;
+  border-radius: 10px;
+  border: none;
+  margin-top: 8px;
+  transition: background-color 0.3s ease-in-out;
+
+  .plus-icon {
+    display: flex;
+    align-items: center;
+    width: 0;
+    margin-left: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition:
+      width 0.25s ease-in-out,
+      margin-left 0.25s ease-in-out,
+      opacity 0.2s ease-in-out 0.15s;
+
+    img {
+      height: 20px;
+      width: 20px;
+      flex-shrink: 0;
+    }
+  }
+
+  &:hover {
+    background-color: #d99a55;
+
+    .plus-icon {
+      width: 20px;
+      margin-left: 8px;
+      opacity: 1;
+    }
+  }
+}
+
+.smart-img {
+  position: relative;
+  margin-top: 80px;
+  height: 360px;
+  width: 220px;
+
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: opacity 0.3s ease-in-out;
+    height: 450px;
+    width: auto;
+  }
+
+  .phone-hover {
+    opacity: 0;
+  }
+
+  &:hover img:not(.phone-hover) {
+    opacity: 0;
+  }
+
+  &:hover .phone-hover {
+    opacity: 1;
+  }
+}
