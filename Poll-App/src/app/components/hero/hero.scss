@@ -30,7 +30,9 @@ h1 {
 }
 
 .n-survey {
+  width: fit-content;
   display: flex;
+  text-decoration: none;
   align-items: center;
   justify-content: flex-start;
   padding: 0 20px;
