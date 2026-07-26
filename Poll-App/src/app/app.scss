@@ -9,7 +9,9 @@ header {
 }
 .section-one {
   display: flex;
-  gap: 50px;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 220px;
 }
 
 .collect-feedback {
@@ -35,27 +37,63 @@ h1 {
 }
 
 .n-survey {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 20px;
+  height: 42px;
   background-color: $color-button-secondary-orange;
   font-size: 16px;
   font-family: 'Mulish';
   font-weight: 700;
   color: #221227;
   border-radius: 10px;
-  width: 115px;
-  height: 42px;
+  border: none;
   margin-top: 8px;
+  transition: background-color 0.3s ease-in-out;
+
+  .plus-icon {
+    display: flex;
+    align-items: center;
+    width: 0;
+    margin-left: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition:
+      width 0.25s ease-in-out,
+      margin-left 0.25s ease-in-out,
+      opacity 0.2s ease-in-out 0.15s;
+
+    img {
+      height: 20px;
+      width: 20px;
+      flex-shrink: 0;
+    }
+  }
+
+  &:hover {
+    background-color: #d99a55;
+
+    .plus-icon {
+      width: 20px;
+      margin-left: 8px;
+      opacity: 1;
+    }
+  }
 }
 
 .smart-img {
   position: relative;
   margin-top: 80px;
+  height: 360px;
+  width: 220px;
 
   img {
     position: absolute;
     top: 0;
     left: 0;
     transition: opacity 0.3s ease-in-out;
-    height: 360px;
+    height: 450px;
     width: auto;
   }
 
@@ -73,13 +111,13 @@ h1 {
 }
 
 .section-two {
-  padding-inline: 60px;
+  padding-inline: 180px;
   h2 {
     color: $color-primary-orange;
     font-family: $font-heading;
-    font-size: 3.75rem;
+    font-size: 4.5rem;
     text-align: center;
-    padding-top: 40px;
+    padding-top: 70px;
   }
 
   p {
@@ -103,6 +141,7 @@ h1 {
     height: 300px;
     width: 300px;
     border-radius: 0 60px 0 0;
+    cursor: pointer;
 
     &:hover {
       background-color: #f4e9fb;
@@ -149,7 +188,7 @@ h1 {
   .filter-buttons {
     display: flex;
     gap: 12px;
-    padding-left: 50px;
+    padding-left: 180px;
 
     button {
       border: none;
@@ -165,90 +204,102 @@ h1 {
       &:first-child {
         background-color: $color-primary-orange;
       }
-    }
-  }
-  .sort-dropdown {
-    position: relative;
-    .sort-toggle {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: none;
-      border: none;
-      border-radius: 12px;
-      padding: 10px 16px;
-      color: #ffffff;
-      font-family: 'Mulish';
-      font-weight: 700;
-      font-size: 16px;
 
-      &:hover {
-        background-color: #d9d9d91f;
-      }
-
-      .arrow-wrapper {
-        position: relative;
-        width: 15px;
-        height: 8px;
-        display: inline-block;
-      }
-
-      .arrow-wrapper img {
-        position: absolute;
-        top: 0;
-        left: 0;
-      }
-
-      .arrow-hover {
-        opacity: 0;
-      }
-
-      &:hover .arrow-default {
-        opacity: 0;
-      }
-
-      &:hover .arrow-hover {
-        opacity: 1;
-      }
-    }
-    .sort-list {
-      display: none;
-      list-style: none;
-      position: absolute;
-      top: 100%;
-      right: 0;
-      margin-top: 8px;
-      padding: 12px 0;
-      background-color: #ffffff;
-      border-radius: 12px;
-      min-width: 220px;
-
-      li {
-        padding: 10px 20px;
-        color: $color-primary-purple;
-        font-family: 'Mulish';
-        cursor: pointer;
+      &:not(:first-child):hover {
+        background-color: #ffcfa1;
       }
     }
   }
 }
+.sort-dropdown {
+  position: relative;
+  .sort-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    border: none;
+    border-radius: 12px;
+    padding: 10px 16px;
+    color: #ffffff;
+    font-family: 'Mulish';
+    font-weight: 700;
+    font-size: 16px;
+    margin-right: 180px;
+
+    &:hover {
+      background-color: #d9d9d91f;
+    }
+
+    .arrow-wrapper {
+      position: relative;
+      width: 15px;
+      height: 8px;
+      display: inline-block;
+    }
+
+    .arrow-wrapper img {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .arrow-hover {
+      opacity: 0;
+    }
+
+    &:hover .arrow-default {
+      opacity: 0;
+    }
+
+    &:hover .arrow-hover {
+      opacity: 1;
+    }
+  }
+  .sort-list {
+    display: none;
+    list-style: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 8px;
+    padding: 12px 0;
+    background-color: #ffffff;
+    border-radius: 12px;
+    min-width: 220px;
+
+    li {
+      padding: 10px 20px;
+      color: $color-primary-purple;
+      font-family: 'Mulish';
+      cursor: pointer;
+    }
+  }
+}
+
 .section-four {
-  padding-inline: 60px;
+  padding-inline: 180px;
   margin-top: 40px;
 
   .survey-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 20px;
+    gap: 10px;
+    // max-width: 92%;
   }
 
   .list-card {
-    background-color: #2b2230;
-    border-radius: 0 40px 0 0;
-    padding: 24px;
+    background-color: #d9d9d914;
+    border-radius: 0 60px 0 0;
+    padding: 14px;
     display: flex;
     flex-direction: column;
-    min-height: 160px;
+    min-height: 80px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #d9d9d929;
+    }
 
     .span-category {
       color: $color-primary-orange;
@@ -265,7 +316,7 @@ h1 {
     }
 
     .span-deadline {
-      align-self: flex-start;
+      align-self: flex-end;
       margin-top: auto;
       padding: 4px 6px;
       border-top-right-radius: 14px;
