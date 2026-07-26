@@ -12,3 +12,7 @@ body {
 button {
   cursor: pointer;
 }
+
+html:has(dialog[open]) {
+  overflow: hidden;
+}

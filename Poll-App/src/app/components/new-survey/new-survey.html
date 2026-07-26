@@ -1,1 +1,114 @@
-<p>new-survey works!</p>
+<dialog #newSurveyDialog class="new-survey-dialog">
+  <span class="draft-badge">Draft</span>
+  <div class="dialog-header">
+    <h2>Create new survey</h2>
+    <button type="button" class="cancel-btn" (click)="close()">
+      Cancel <img src="/icons/close.svg" alt="" />
+    </button>
+  </div>
+
+  <div class="form-container">
+    <div class="form-column-left">
+      <div class="field">
+        <label for="survey-name">Survey name</label>
+        <div class="input-with-icon">
+          <input id="survey-name" type="text" />
+          <span class="trash-btn">
+            <img src="/icons/trash_light.svg" alt="" class="trash-default" />
+            <img src="/icons/trash_dark.svg" alt="" class="trash-hover" />
+          </span>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="end-date">Set end date <span class="optional">(optional)</span></label>
+          <div class="input-with-icon">
+            <input id="end-date" type="date" />
+            <span class="trash-btn">
+              <img src="/icons/trash_light.svg" alt="" class="trash-default" />
+              <img src="/icons/trash_dark.svg" alt="" class="trash-hover" />
+            </span>
+          </div>
+        </div>
+
+        <div class="field category-field">
+          <button type="button" class="category-toggle">
+            Choose category
+            <span class="arrow-wrapper">
+              <img src="/icons/arrow_drop_down.svg" alt="" class="arrow-default" />
+              <img src="/icons/arrow_drop_down_orange.svg" alt="" class="arrow-hover" />
+            </span>
+          </button>
+          <ul class="category-list">
+            <li>Team activities</li>
+            <li>Gaming</li>
+            <li>Healthy Lifestyle</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-column-right">
+      <div class="field">
+        <label for="description">Describing text <span class="optional">(optional)</span></label>
+        <div class="input-with-icon">
+          <textarea id="description"></textarea>
+          <span class="trash-btn">
+            <img src="/icons/trash_light.svg" alt="" class="trash-default" />
+            <img src="/icons/trash_dark.svg" alt="" class="trash-hover" />
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="question-block">
+      <div class="question-header">
+        <label for="question-1">1. Question</label>
+        <span class="trash-btn">
+          <img src="/icons/trash_light.svg" alt="" class="trash-default" />
+          <img src="/icons/trash_dark.svg" alt="" class="trash-hover" />
+        </span>
+      </div>
+      <input id="question-1" type="text" placeholder="Which date would work best for you?" />
+
+      <div class="answers-header">
+        <span>Answers</span>
+        <label class="checkbox-label">
+          <input type="checkbox" />
+          Allow multiple answers.
+        </label>
+      </div>
+
+      <div class="answer-row">
+        <span>A.</span>
+        <input type="text" />
+        <span class="trash-btn">
+          <img src="/icons/trash_light.svg" alt="" class="trash-default" />
+          <img src="/icons/trash_dark.svg" alt="" class="trash-hover" />
+        </span>
+      </div>
+      <div class="answer-row">
+        <span>B.</span>
+        <input type="text" />
+        <span class="trash-btn">
+          <img src="/icons/trash_light.svg" alt="" class="trash-default" />
+          <img src="/icons/trash_dark.svg" alt="" class="trash-hover" />
+        </span>
+      </div>
+
+      <button type="button" class="add-answer-btn">
+        Add answer <img src="/icons/add_circle.svg" alt="" />
+      </button>
+    </div>
+
+    <button type="button" class="add-question-btn">
+      Add next question <img src="/icons/add_circle.svg" alt="" />
+    </button>
+  </div>
+
+  <button type="button" class="publish-btn">
+    Publish
+    <span class="check-icon"><img src="/icons/check.svg" alt="" /></span>
+  </button>
+</dialog>
