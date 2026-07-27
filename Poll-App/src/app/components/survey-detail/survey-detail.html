@@ -25,10 +25,18 @@
             <legend>1. Which date would work best for you?</legend>
             <p class="hint">More than one answers are possible.</p>
 
-            <label><input type="checkbox" /><span><strong>A.</strong> 19.09.2025, Friday</span></label>
-            <label><input type="checkbox" /><span><strong>B.</strong> 10.10.2025, Friday</span></label>
-            <label><input type="checkbox" /><span><strong>C.</strong> 11.10.2025, Saturday</span></label>
-            <label><input type="checkbox" /><span><strong>D.</strong> 31.10.2025, Friday</span></label>
+            <label
+              ><input type="checkbox" /><span><strong>A.</strong> 19.09.2025, Friday</span></label
+            >
+            <label
+              ><input type="checkbox" /><span><strong>B.</strong> 10.10.2025, Friday</span></label
+            >
+            <label
+              ><input type="checkbox" /><span><strong>C.</strong> 11.10.2025, Saturday</span></label
+            >
+            <label
+              ><input type="checkbox" /><span><strong>D.</strong> 31.10.2025, Friday</span></label
+            >
           </fieldset>
 
           <!-- 2 Feld  -->
@@ -36,30 +44,62 @@
             <legend>2. Choose the activities you prefer</legend>
             <p class="hint">More than one answers are possible.</p>
 
-            <label><input type="checkbox" /><span><strong>A.</strong> Outdoor adventure like kayaking</span></label>
-            <label><input type="checkbox" /><span><strong>B.</strong> Office Costume Party</span></label>
-            <label><input type="checkbox" /><span><strong>C.</strong> Bowling, mini-golf, volleyball</span></label>
-            <label><input type="checkbox" /><span><strong>D.</strong> Beach party, Music & cocktails</span></label>
-            <label><input type="checkbox" /><span><strong>E.</strong> Escape room</span></label>
+            <label
+              ><input type="checkbox" /><span
+                ><strong>A.</strong> Outdoor adventure like kayaking</span
+              ></label
+            >
+            <label
+              ><input type="checkbox" /><span><strong>B.</strong> Office Costume Party</span></label
+            >
+            <label
+              ><input type="checkbox" /><span
+                ><strong>C.</strong> Bowling, mini-golf, volleyball</span
+              ></label
+            >
+            <label
+              ><input type="checkbox" /><span
+                ><strong>D.</strong> Beach party, Music & cocktails</span
+              ></label
+            >
+            <label
+              ><input type="checkbox" /><span><strong>E.</strong> Escape room</span></label
+            >
           </fieldset>
 
           <!-- 3 Feld  -->
           <fieldset>
             <legend>3. What's most important to you in a team event?</legend>
 
-            <label><input type="checkbox" /><span><strong>A.</strong> Team bonding</span></label>
-            <label><input type="checkbox" /><span><strong>B.</strong> Food and drinks</span></label>
-            <label><input type="checkbox" /><span><strong>C.</strong> Trying something new</span></label>
-            <label><input type="checkbox" /><span><strong>D.</strong> Keeping it low-key and stress-free</span></label>
+            <label
+              ><input type="checkbox" /><span><strong>A.</strong> Team bonding</span></label
+            >
+            <label
+              ><input type="checkbox" /><span><strong>B.</strong> Food and drinks</span></label
+            >
+            <label
+              ><input type="checkbox" /><span><strong>C.</strong> Trying something new</span></label
+            >
+            <label
+              ><input type="checkbox" /><span
+                ><strong>D.</strong> Keeping it low-key and stress-free</span
+              ></label
+            >
           </fieldset>
 
           <!-- 4 Feld  -->
           <fieldset>
             <legend>4. How long would you prefer the event to last?</legend>
 
-            <label><input type="checkbox" /><span><strong>A.</strong> Half a day</span></label>
-            <label><input type="checkbox" /><span><strong>B.</strong> Full day</span></label>
-            <label><input type="checkbox" /><span><strong>C.</strong> Evening only</span></label>
+            <label
+              ><input type="checkbox" /><span><strong>A.</strong> Half a day</span></label
+            >
+            <label
+              ><input type="checkbox" /><span><strong>B.</strong> Full day</span></label
+            >
+            <label
+              ><input type="checkbox" /><span><strong>C.</strong> Evening only</span></label
+            >
           </fieldset>
 
           <button type="submit" class="complete-btn">Complete survey</button>
@@ -67,7 +107,112 @@
       </section>
 
       <aside class="survey-results">
-        <!-- "Survey results LIVE" + die Balkendiagramme -->
+        <h2>Survey results <span class="live">LIVE</span></h2>
+
+        <!-- <div class="no-results">
+          <p>Results will be shown here after participants complete the survey.</p>
+          <p class="no-answers">There are no answers yet.</p>
+        </div> -->
+
+        <div class="result-block">
+          <h3>1. Which date would work best for you?</h3>
+
+          <div class="result-row">
+            <span class="option-label">A</span>
+            <div class="bar-track"><div class="bar-fill" style="width: 27%"></div></div>
+            <span class="percentage">27%</span>
+          </div>
+          <div class="result-row">
+            <span class="option-label">B</span>
+            <div class="bar-track"><div class="bar-fill" style="width: 44%"></div></div>
+            <span class="percentage">44%</span>
+          </div>
+          <div class="result-row">
+            <span class="option-label">C</span>
+            <div class="bar-track"><div class="bar-fill" style="width: 3%"></div></div>
+            <span class="percentage">3%</span>
+          </div>
+          <div class="result-row">
+            <span class="option-label">D</span>
+            <div class="bar-track"><div class="bar-fill" style="width: 26%"></div></div>
+            <span class="percentage">26%</span>
+          </div>
+        </div>
+
+        <div class="result-block">
+          <h3>2. Choose the activities you prefer?</h3>
+
+          <div class="result-row">
+            <span class="option-label">A</span>
+            <div class="bar-track"><div class="bar-fill" style="width: 60%"></div></div>
+            <span class="percentage">60%</span>
+          </div>
+          <div class="result-row">
+            <span class="option-label">B</span>
+            <div class="bar-track"><div class="bar-fill" style="width: 0%"></div></div>
+            <span class="percentage">0%</span>
+          </div>
+          <div class="result-row">
+            <span class="option-label">C</span>
+            <div class="bar-track"><div class="bar-fill" style="width: 14%"></div></div>
+            <span class="percentage">14%</span>
+          </div>
+          <div class="result-row">
+            <span class="option-label">D</span>
+            <div class="bar-track"><div class="bar-fill" style="width: 26%"></div></div>
+            <span class="percentage">26%</span>
+          </div>
+          <div class="result-row">
+            <span class="option-label">E</span>
+            <div class="bar-track"><div class="bar-fill" style="width: 0%"></div></div>
+            <span class="percentage">0%</span>
+          </div>
+        </div>
+
+        <div class="result-block">
+          <h3>3. What's most important to you in a team event?</h3>
+
+          <div class="result-row">
+            <span class="option-label">A</span>
+            <div class="bar-track"><div class="bar-fill" style="width: 44%"></div></div>
+            <span class="percentage">44%</span>
+          </div>
+          <div class="result-row">
+            <span class="option-label">B</span>
+            <div class="bar-track"><div class="bar-fill" style="width: 3%"></div></div>
+            <span class="percentage">3%</span>
+          </div>
+          <div class="result-row">
+            <span class="option-label">C</span>
+            <div class="bar-track"><div class="bar-fill" style="width: 26%"></div></div>
+            <span class="percentage">26%</span>
+          </div>
+          <div class="result-row">
+            <span class="option-label">D</span>
+            <div class="bar-track"><div class="bar-fill" style="width: 27%"></div></div>
+            <span class="percentage">27%</span>
+          </div>
+        </div>
+
+        <div class="result-block">
+          <h3>4. How long would you prefer the event to last?</h3>
+
+          <div class="result-row">
+            <span class="option-label">A</span>
+            <div class="bar-track"><div class="bar-fill" style="width: 14%"></div></div>
+            <span class="percentage">14%</span>
+          </div>
+          <div class="result-row">
+            <span class="option-label">B</span>
+            <div class="bar-track"><div class="bar-fill" style="width: 86%"></div></div>
+            <span class="percentage">86%</span>
+          </div>
+          <div class="result-row">
+            <span class="option-label">C</span>
+            <div class="bar-track"><div class="bar-fill" style="width: 0%"></div></div>
+            <span class="percentage">0%</span>
+          </div>
+        </div>
       </aside>
     </div>
   </div>
