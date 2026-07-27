@@ -1,0 +1,227 @@
+@use '../../../styles/variables' as *;
+
+main {
+  background-color: #ffffff;
+  min-height: 100vh;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+
+  .content {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding-inline: 5rem;
+
+    .logo {
+      padding-top: 1.5rem;
+      height: 40px;
+    }
+  }
+}
+
+.detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.n-survey {
+  width: fit-content;
+  display: flex;
+  text-decoration: none;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0px 25px;
+  height: 50px;
+  background-color: #ffcfa1;
+  font-size: 18px;
+  font-family: 'Mulish';
+  font-weight: 700;
+  color: #221227;
+  border-radius: 10px;
+  border: none;
+  margin-top: 1.5rem;
+  transition: background-color 0.3s ease-in-out;
+
+  .plus-icon {
+    display: flex;
+    align-items: center;
+    width: 0;
+    margin-left: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition:
+      width 0.25s ease-in-out,
+      margin-left 0.25s ease-in-out,
+      opacity 0.2s ease-in-out 0.15s;
+
+    img {
+      height: 20px;
+      width: 20px;
+      flex-shrink: 0;
+    }
+  }
+
+  &:hover {
+    background-color: #d99a55;
+
+    .plus-icon {
+      width: 20px;
+      margin-left: 8px;
+      opacity: 1;
+    }
+  }
+}
+
+.survey-form {
+  display: flex;
+  flex-direction: column;
+  background-color: #8e70991a;
+  margin-top: 24px;
+  border-radius: 0px 160px 0px 0px;
+
+  .draft-badge {
+    align-self: flex-start;
+    margin-top: auto;
+    color: $color-primary-purple;
+    font-family: 'Mulish';
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    padding: 4px 6px;
+    border-top-right-radius: 16px;
+    background-color: $color-primary-orange;
+    margin: 34px 0px 4px 34px; // oben 10px, rechts 20px, unten 15px, links 5px
+    width: 90px;
+  }
+
+  .meta-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 34px;
+    padding-right: 44px;
+    font-family: 'Mulish';
+    font-size: 14px;
+  }
+  h1 {
+    font-family: 'Nerko One';
+    color: #ee9236;
+    font-size: 54px;
+    line-height: 0.8;
+    padding-left: 34px;
+    margin-top: 15px;
+  }
+
+  p {
+    padding-inline: 34px;
+    margin-top: -26px;
+    font-family: 'Mulish';
+    font-size: 17px;
+    font-weight: 300;
+  }
+}
+
+.survey-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 40px;
+  margin-top: 24px;
+}
+
+form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px 48px;
+  margin-top: 16px;
+  padding-inline: 34px;
+}
+
+fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+
+  legend {
+    font-family: 'Mulish';
+    font-weight: 700;
+    font-size: 18px;
+    color: $color-primary-purple;
+    padding: 0;
+    padding-left: 1.2em;
+    text-indent: -1.2em;
+    margin-bottom: 4px;
+    max-width: 290px;
+  }
+
+  .hint {
+    font-family: 'Mulish';
+    font-size: 13px;
+    color: #6b6b6b;
+    margin: 0 0 12px 0;
+  }
+
+  label {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-family: 'Mulish';
+    font-size: 15px;
+    margin-bottom: 10px;
+    padding: 4px 6px;
+    border-radius: 6px;
+    cursor: pointer;
+    max-width: 260px;
+    transition: background-color 0.2s ease-in-out;
+
+    &:hover:not(:has(input:checked)) {
+      background-color: $color-button-dark-brown;
+    }
+
+    input[type='checkbox'] {
+      appearance: none;
+      box-sizing: border-box;
+      width: 16px;
+      height: 16px;
+      margin: 0;
+      margin-top: 2px; // grob zur ersten Textzeile ausrichten
+      padding: 0;
+      border: 1px solid $color-primary-purple;
+      border-radius: 4px;
+      cursor: pointer;
+      flex-shrink: 0;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 10px;
+
+      &:checked {
+        background-color: $color-primary-orange;
+        border-color: $color-primary-orange;
+        background-image: url('/icons/check.svg');
+      }
+    }
+
+    span {
+      padding-left: 1.2em;
+      text-indent: -1.2em;
+    }
+  }
+}
+
+.complete-btn {
+  grid-column: 2;
+  justify-self: end;
+  background-color: #ffb7704d;
+  color: $color-primary-purple;
+  font-family: 'Mulish';
+  font-weight: 700;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 24px;
+  margin-bottom: 44px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $color-button-secondary-orange;
+  }
+}

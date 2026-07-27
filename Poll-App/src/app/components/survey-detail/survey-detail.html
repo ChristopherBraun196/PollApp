@@ -1,1 +1,76 @@
-<p>survey-detail works!</p>
+<main>
+  <div class="content">
+    <div class="detail-header">
+      <img src="/images/pollapp_dark.png" alt="logo" class="logo" />
+      <button class="n-survey" (click)="openDialog()">
+        Create survey
+        <span class="plus-icon"><img src="/icons/add_circle.svg" alt="" /></span>
+      </button>
+    </div>
+    <div class="survey-layout">
+      <section class="survey-form">
+        <span class="draft-badge"> Published </span>
+        <div class="meta-row">
+          <span>Ends on 01.09.2025</span>
+          <span>Category: Team activities</span>
+        </div>
+        <h1>Let's Plan the Next Team <br />Event Together</h1>
+        <p>
+          We want to create team activities that everyone will enjoy – share your preferences and
+          ideas in our survey to help us plan better experiences together.
+        </p>
+        <form>
+          <!-- 1 Feld -->
+          <fieldset>
+            <legend>1. Which date would work best for you?</legend>
+            <p class="hint">More than one answers are possible.</p>
+
+            <label><input type="checkbox" /><span><strong>A.</strong> 19.09.2025, Friday</span></label>
+            <label><input type="checkbox" /><span><strong>B.</strong> 10.10.2025, Friday</span></label>
+            <label><input type="checkbox" /><span><strong>C.</strong> 11.10.2025, Saturday</span></label>
+            <label><input type="checkbox" /><span><strong>D.</strong> 31.10.2025, Friday</span></label>
+          </fieldset>
+
+          <!-- 2 Feld  -->
+          <fieldset>
+            <legend>2. Choose the activities you prefer</legend>
+            <p class="hint">More than one answers are possible.</p>
+
+            <label><input type="checkbox" /><span><strong>A.</strong> Outdoor adventure like kayaking</span></label>
+            <label><input type="checkbox" /><span><strong>B.</strong> Office Costume Party</span></label>
+            <label><input type="checkbox" /><span><strong>C.</strong> Bowling, mini-golf, volleyball</span></label>
+            <label><input type="checkbox" /><span><strong>D.</strong> Beach party, Music & cocktails</span></label>
+            <label><input type="checkbox" /><span><strong>E.</strong> Escape room</span></label>
+          </fieldset>
+
+          <!-- 3 Feld  -->
+          <fieldset>
+            <legend>3. What's most important to you in a team event?</legend>
+
+            <label><input type="checkbox" /><span><strong>A.</strong> Team bonding</span></label>
+            <label><input type="checkbox" /><span><strong>B.</strong> Food and drinks</span></label>
+            <label><input type="checkbox" /><span><strong>C.</strong> Trying something new</span></label>
+            <label><input type="checkbox" /><span><strong>D.</strong> Keeping it low-key and stress-free</span></label>
+          </fieldset>
+
+          <!-- 4 Feld  -->
+          <fieldset>
+            <legend>4. How long would you prefer the event to last?</legend>
+
+            <label><input type="checkbox" /><span><strong>A.</strong> Half a day</span></label>
+            <label><input type="checkbox" /><span><strong>B.</strong> Full day</span></label>
+            <label><input type="checkbox" /><span><strong>C.</strong> Evening only</span></label>
+          </fieldset>
+
+          <button type="submit" class="complete-btn">Complete survey</button>
+        </form>
+      </section>
+
+      <aside class="survey-results">
+        <!-- "Survey results LIVE" + die Balkendiagramme -->
+      </aside>
+    </div>
+  </div>
+
+  <app-new-survey />
+</main>
