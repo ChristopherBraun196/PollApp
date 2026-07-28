@@ -1,4 +1,4 @@
-<dialog #newSurveyDialog class="new-survey-dialog">
+<dialog #newSurveyDialog class="new-survey-dialog" [formGroup]="surveyForm" (close)="onDialogClose()">
   <span class="draft-badge">Draft</span>
   <div class="dialog-header">
     <h2>Create new survey</h2>
@@ -12,8 +12,8 @@
       <div class="field">
         <label for="survey-name">Survey name</label>
         <div class="input-with-icon">
-          <input id="survey-name" type="text" />
-          <span class="trash-btn">
+          <input id="survey-name" type="text" formControlName="surveyName" />
+          <span class="trash-btn" (click)="surveyForm.get('surveyName')?.reset()">
             <img src="/icons/trash_light.svg" alt="" class="trash-default" />
             <img src="/icons/trash_dark.svg" alt="" class="trash-hover" />
           </span>
@@ -24,8 +24,8 @@
         <div class="field">
           <label for="end-date">Set end date <span class="optional">(optional)</span></label>
           <div class="input-with-icon">
-            <input id="end-date" type="date" />
-            <span class="trash-btn">
+            <input id="end-date" type="date" formControlName="endDate" />
+            <span class="trash-btn" (click)="surveyForm.get('endDate')?.reset()">
               <img src="/icons/trash_light.svg" alt="" class="trash-default" />
               <img src="/icons/trash_dark.svg" alt="" class="trash-hover" />
             </span>
@@ -33,17 +33,28 @@
         </div>
 
         <div class="field category-field">
-          <button type="button" class="category-toggle">
+          <button
+            type="button"
+            class="category-toggle"
+            [class.open]="categoryOpen()"
+            (click)="toggleCategory()"
+          >
             Choose category
+
             <span class="arrow-wrapper">
               <img src="/icons/arrow_drop_down.svg" alt="" class="arrow-default" />
               <img src="/icons/arrow_drop_down_orange.svg" alt="" class="arrow-hover" />
             </span>
           </button>
-          <ul class="category-list">
-            <li>Team activities</li>
-            <li>Gaming</li>
-            <li>Healthy Lifestyle</li>
+
+          @if (!categoryOpen() && surveyForm.get('category')?.value) {
+            <span class="selected-category">{{ surveyForm.get('category')?.value }}</span>
+          }
+
+          <ul class="category-list" [class.open]="categoryOpen()">
+            <li (click)="selectCategory('Team activities')">Team activities</li>
+            <li (click)="selectCategory('Gaming')">Gaming</li>
+            <li (click)="selectCategory('Healthy Lifestyle')">Healthy Lifestyle</li>
           </ul>
         </div>
       </div>
@@ -53,61 +64,69 @@
       <div class="field">
         <label for="description">Describing text <span class="optional">(optional)</span></label>
         <div class="input-with-icon">
-          <textarea id="description"></textarea>
-          <span class="trash-btn">
+          <textarea id="description" formControlName="description"></textarea>
+          <span class="trash-btn" (click)="surveyForm.get('description')?.reset()">
             <img src="/icons/trash_light.svg" alt="" class="trash-default" />
             <img src="/icons/trash_dark.svg" alt="" class="trash-hover" />
           </span>
         </div>
       </div>
     </div>
+    <ng-container formArrayName="questions">
+      @for (question of questions.controls; track question; let qIndex = $index) {
+        <div class="question-block" [formGroupName]="qIndex">
+          <div class="question-header">
+            <label>{{ qIndex + 1 }}. Question</label>
+            <span class="trash-btn" (click)="removeQuestion(qIndex)">
+              <img src="/icons/trash_light.svg" alt="" class="trash-default" />
+              <img src="/icons/trash_dark.svg" alt="" class="trash-hover" />
+            </span>
+          </div>
+          <input
+            type="text"
+            formControlName="questionText"
+            placeholder="Which date would work best for you?"
+          />
 
-    <div class="question-block">
-      <div class="question-header">
-        <label for="question-1">1. Question</label>
-        <span class="trash-btn">
-          <img src="/icons/trash_light.svg" alt="" class="trash-default" />
-          <img src="/icons/trash_dark.svg" alt="" class="trash-hover" />
-        </span>
-      </div>
-      <input id="question-1" type="text" placeholder="Which date would work best for you?" />
+          <div class="answers-header">
+            <span>Answers</span>
+            <label class="checkbox-label">
+              <input type="checkbox" formControlName="allowMultiple" />
+              Allow multiple answers.
+            </label>
+          </div>
 
-      <div class="answers-header">
-        <span>Answers</span>
-        <label class="checkbox-label">
-          <input type="checkbox" />
-          Allow multiple answers.
-        </label>
-      </div>
+          <div formArrayName="answers">
+            @for (answer of getAnswers(qIndex).controls; track answer; let aIndex = $index) {
+              <div class="answer-row" [formGroupName]="aIndex">
+                <span>{{ getLetter(aIndex) }}.</span>
+                <input type="text" formControlName="answerText" />
+                <span class="trash-btn" (click)="removeAnswer(qIndex, aIndex)">
+                  <img src="/icons/trash_light.svg" alt="" class="trash-default" />
+                  <img src="/icons/trash_dark.svg" alt="" class="trash-hover" />
+                </span>
+              </div>
+            }
+          </div>
 
-      <div class="answer-row">
-        <span>A.</span>
-        <input type="text" />
-        <span class="trash-btn">
-          <img src="/icons/trash_light.svg" alt="" class="trash-default" />
-          <img src="/icons/trash_dark.svg" alt="" class="trash-hover" />
-        </span>
-      </div>
-      <div class="answer-row">
-        <span>B.</span>
-        <input type="text" />
-        <span class="trash-btn">
-          <img src="/icons/trash_light.svg" alt="" class="trash-default" />
-          <img src="/icons/trash_dark.svg" alt="" class="trash-hover" />
-        </span>
-      </div>
+          @if (getAnswers(qIndex).controls.length < 6) {
+            <button type="button" class="add-answer-btn" (click)="addAnswer(qIndex)">
+              Add answer <img src="/icons/add_circle.svg" alt="" />
+            </button>
+          }
+        </div>
+      }
+    </ng-container>
 
-      <button type="button" class="add-answer-btn">
-        Add answer <img src="/icons/add_circle.svg" alt="" />
+    @if (questions.length < 4) {
+      <button type="button" class="add-question-btn" (click)="addQuestion()">
+        Add next question <img src="/icons/add_circle.svg" alt="" />
       </button>
-    </div>
-
-    <button type="button" class="add-question-btn">
-      Add next question <img src="/icons/add_circle.svg" alt="" />
-    </button>
+    }
   </div>
 
-  <button type="button" class="publish-btn">
+  <button type="button" class="publish-btn" [disabled]="surveyForm.invalid" (click)="logFormValue()">
+
     Publish
     <span class="check-icon"><img src="/icons/check.svg" alt="" /></span>
   </button>
