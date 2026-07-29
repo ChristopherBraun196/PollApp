@@ -8,11 +8,6 @@ import { FormArray, FormBuilder, ReactiveFormsModule, Validators } from '@angula
   styleUrl: './new-survey.scss',
 })
 export class NewSurvey {
-  logFormValue() {
-    // alert('Button wurde geklickt!');
-    console.log(this.surveyForm.value);
-  }
-
   dialogRef = viewChild<ElementRef<HTMLDialogElement>>('newSurveyDialog');
   private fb = inject(FormBuilder);
   categoryOpen = signal(false);
@@ -28,6 +23,7 @@ export class NewSurvey {
   onDialogClose() {
     this.categoryOpen.set(false);
     this.surveyForm.reset();
+    this.surveyForm.markAsUntouched();
     this.questions.clear();
     this.questions.push(this.createQuestion());
   }
@@ -40,7 +36,7 @@ export class NewSurvey {
     questions: this.fb.array([this.createQuestion()]),
   });
 
-  get questions(){
+  get questions() {
     return this.surveyForm.get('questions') as FormArray;
   }
 
@@ -61,19 +57,19 @@ export class NewSurvey {
 
   createQuestion() {
     return this.fb.group({
-      questionText: [''],
+      questionText: ['', [Validators.required, Validators.minLength(5)]],
       allowMultiple: [false],
       answers: this.fb.array([this.createAnswer(), this.createAnswer()]),
     });
   }
 
-  addQuestion(){
+  addQuestion() {
     if (this.questions.length < 4) {
       this.questions.push(this.createQuestion());
     }
   }
 
-  removeQuestion(index: number){
+  removeQuestion(index: number) {
     if (index === 0) {
       this.questions.at(0).reset();
     } else {
@@ -81,18 +77,18 @@ export class NewSurvey {
     }
   }
 
-  getAnswers(questionIndex: number){
+  getAnswers(questionIndex: number) {
     return this.questions.at(questionIndex).get('answers') as FormArray;
   }
 
-  addAnswer(questionIndex: number){
+  addAnswer(questionIndex: number) {
     const answers = this.getAnswers(questionIndex);
-    if (answers.length <6){
+    if (answers.length < 6) {
       answers.push(this.createAnswer());
     }
   }
 
-  removeAnswer(questionIndex: number, answerIndex: number){
+  removeAnswer(questionIndex: number, answerIndex: number) {
     if (questionIndex === 0 && answerIndex < 2) {
       this.getAnswers(0).at(answerIndex).reset();
     } else {
@@ -101,6 +97,6 @@ export class NewSurvey {
   }
 
   getLetter(index: number) {
-  return String.fromCharCode(65 + index);
-}
+    return String.fromCharCode(65 + index);
+  }
 }

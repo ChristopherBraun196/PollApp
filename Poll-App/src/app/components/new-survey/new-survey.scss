@@ -113,7 +113,19 @@
 }
 
 .field {
+  position: relative;
   margin-bottom: 20px;
+
+  .error-text {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    color: #e80000;
+    font-family: 'Mulish';
+    font-size: 14px;
+  }
 
   label {
     display: block;
@@ -130,7 +142,7 @@
 
 .form-column-left {
   .field {
-    margin-bottom: 8px;
+    margin-bottom: 18px;
   }
 }
 
@@ -360,6 +372,14 @@ textarea {
     margin-bottom: 16px;
   }
 
+  .error-text {
+    display: block;
+    margin-bottom: 8px;
+    color: #f01b1b;
+    font-family: 'Mulish';
+    font-size: 14px;
+  }
+
   .answers-header {
     display: flex;
     justify-content: flex-start;
@@ -520,18 +540,18 @@ textarea {
     }
   }
   cursor: pointer;
-&:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 
-  &:hover{
-    background-color: $color-button-secondary-orange;
+    &:hover {
+      background-color: $color-button-secondary-orange;
 
-    .check-icon{
-      width: 0;
-      margin-left: 0;
-      opacity: 0;
+      .check-icon {
+        width: 0;
+        margin-left: 0;
+        opacity: 0;
+      }
     }
   }
-
-}}
+}

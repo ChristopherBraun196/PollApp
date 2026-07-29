@@ -18,6 +18,9 @@
             <img src="/icons/trash_dark.svg" alt="" class="trash-hover" />
           </span>
         </div>
+        @if (surveyForm.get('surveyName')?.invalid && surveyForm.get('surveyName')?.touched){
+          <span class="error-text">Please enter at least 5 characters.</span>
+        }
       </div>
 
       <div class="field-row">
@@ -87,6 +90,9 @@
             formControlName="questionText"
             placeholder="Which date would work best for you?"
           />
+          @if (questions.at(qIndex).get('questionText')?.invalid && questions.at(qIndex).get('questionText')?.touched){
+            <span class="error-text">Please fill out the question.</span>
+          }
 
           <div class="answers-header">
             <span>Answers</span>
@@ -125,9 +131,9 @@
     }
   </div>
 
-  <button type="button" class="publish-btn" [disabled]="surveyForm.invalid" (click)="logFormValue()">
+  <button type="button" class="publish-btn" [disabled]="surveyForm.invalid">
 
-    Publish
+    Publish 
     <span class="check-icon"><img src="/icons/check.svg" alt="" /></span>
   </button>
 </dialog>
