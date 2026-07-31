@@ -9,3 +9,10 @@ export interface Question {
   allowMultiple: boolean;
   answers: Answer[];
 }
+
+export interface Survey {
+  id: number;
+  category: string;
+  title: string; 
+  endDate: Date; 
+}

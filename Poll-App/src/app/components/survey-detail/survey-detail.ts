@@ -1,10 +1,11 @@
 import { Component, viewChild } from '@angular/core';
 import { NewSurvey } from '../new-survey/new-survey';
 import { Question, Answer } from '../../models/survey.model';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-survey-detail',
-  imports: [NewSurvey],
+  imports: [NewSurvey, RouterLink],
   templateUrl: './survey-detail.html',
   styleUrl: './survey-detail.scss',
 })
@@ -71,7 +72,7 @@ export class SurveyDetail {
     answer.selected = !wasSelected;
   }
 
-  completeSurvey(){
+  completeSurvey() {
     console.log(this.questions);
   }
 }

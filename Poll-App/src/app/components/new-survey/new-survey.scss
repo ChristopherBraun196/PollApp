@@ -319,9 +319,9 @@
   }
 }
 
-// #end-date::-webkit-datetime-edit {
-//   color: transparent;
-// }
+input.ng-invalid.ng-touched {
+  border: 2px solid #f01b1b;
+}
 
 input:not([type='checkbox']):focus,
 select:focus,
@@ -367,17 +367,28 @@ textarea {
   }
 
   input {
-    max-width: 380px;
     height: 25px;
     margin-bottom: 16px;
+    width: 380px;
   }
 
-  .error-text {
-    display: block;
-    margin-bottom: 8px;
-    color: #f01b1b;
-    font-family: 'Mulish';
-    font-size: 14px;
+  .question-field {
+    position: relative;
+    margin-bottom: 16px;
+
+    input {
+      margin-bottom: 0;
+    }
+
+    .error-text {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      margin-top: 2px;
+      color: #f01b1b;
+      font-family: 'Mulish';
+      font-size: 14px;
+    }
   }
 
   .answers-header {
@@ -387,6 +398,7 @@ textarea {
     margin-bottom: 12px;
     gap: 145px;
     font-size: 1.25rem;
+    padding-top: 10px;
 
     .checkbox-label {
       display: flex;

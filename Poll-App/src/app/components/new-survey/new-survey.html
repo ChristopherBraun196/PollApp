@@ -1,4 +1,9 @@
-<dialog #newSurveyDialog class="new-survey-dialog" [formGroup]="surveyForm" (close)="onDialogClose()">
+<dialog
+  #newSurveyDialog
+  class="new-survey-dialog"
+  [formGroup]="surveyForm"
+  (close)="onDialogClose()"
+>
   <span class="draft-badge">Draft</span>
   <div class="dialog-header">
     <h2>Create new survey</h2>
@@ -18,7 +23,7 @@
             <img src="/icons/trash_dark.svg" alt="" class="trash-hover" />
           </span>
         </div>
-        @if (surveyForm.get('surveyName')?.invalid && surveyForm.get('surveyName')?.touched){
+        @if (surveyForm.get('surveyName')?.invalid && surveyForm.get('surveyName')?.touched) {
           <span class="error-text">Please enter at least 5 characters.</span>
         }
       </div>
@@ -85,14 +90,19 @@
               <img src="/icons/trash_dark.svg" alt="" class="trash-hover" />
             </span>
           </div>
-          <input
-            type="text"
-            formControlName="questionText"
-            placeholder="Which date would work best for you?"
-          />
-          @if (questions.at(qIndex).get('questionText')?.invalid && questions.at(qIndex).get('questionText')?.touched){
-            <span class="error-text">Please fill out the question.</span>
-          }
+          <div class="question-field">
+            <input
+              type="text"
+              formControlName="questionText"
+              placeholder="Which date would work best for you?"
+            />
+            @if (
+              questions.at(qIndex).get('questionText')?.invalid &&
+              questions.at(qIndex).get('questionText')?.touched
+            ) {
+              <span class="error-text">Please fill out the question.</span>
+            }
+          </div>
 
           <div class="answers-header">
             <span>Answers</span>
@@ -132,8 +142,7 @@
   </div>
 
   <button type="button" class="publish-btn" [disabled]="surveyForm.invalid">
-
-    Publish 
+    Publish
     <span class="check-icon"><img src="/icons/check.svg" alt="" /></span>
   </button>
 </dialog>
