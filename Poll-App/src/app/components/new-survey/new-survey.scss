@@ -333,7 +333,7 @@ textarea:focus {
 input,
 select,
 textarea {
-  border: none;
+  border: 2px solid transparent;
   border-radius: 5px 20px 5px 5px;
   padding: 8px 12px;
   font-family: 'Mulish';

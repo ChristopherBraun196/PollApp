@@ -1,8 +1,8 @@
 import { Component, inject, viewChild } from '@angular/core';
 import { NewSurvey } from '../new-survey/new-survey';
 import { Question, Answer } from '../../models/survey.model';
-import { RouterLink } from '@angular/router';
-// import { Supabase } from '../../services/supabase';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import { Supabase } from '../../services/supabase';
 
 @Component({
   selector: 'app-survey-detail',
@@ -13,52 +13,10 @@ import { RouterLink } from '@angular/router';
 export class SurveyDetail {
   newSurveyDialog = viewChild(NewSurvey);
 
-  // private supabase = inject(Supabase);
+  private route = inject(ActivatedRoute);
+  private supabase = inject(Supabase);
 
-  questions: Question[] = [
-    {
-      legend: '1. Which date would work best for you?',
-      hint: 'More than one answers are possible.',
-      allowMultiple: true,
-      answers: [
-        { label: 'A', text: '19.09.2025, Friday' },
-        { label: 'B', text: '10.10.2025, Friday' },
-        { label: 'C', text: '11.10.2025, Saturday' },
-        { label: 'D', text: '31.10.2025, Friday' },
-      ],
-    },
-    {
-      legend: '2. Choose the activities you prefer',
-      hint: 'More than one answers are possible.',
-      allowMultiple: true,
-      answers: [
-        { label: 'A', text: 'Outdoor adventure like kayaking' },
-        { label: 'B', text: 'Office Costume Party' },
-        { label: 'C', text: 'Bowling, mini-golf, volleyball' },
-        { label: 'D', text: 'Beach party, Music & cocktails' },
-        { label: 'E', text: 'Escape room' },
-      ],
-    },
-    {
-      legend: "3. What's most important to you in a team event?",
-      allowMultiple: false,
-      answers: [
-        { label: 'A', text: 'Team bonding' },
-        { label: 'B', text: 'Food and drinks' },
-        { label: 'C', text: 'Trying something new' },
-        { label: 'D', text: 'Keeping it low-key and stress-free' },
-      ],
-    },
-    {
-      legend: '4. How long would you prefer the event to last?',
-      allowMultiple: false,
-      answers: [
-        { label: 'A', text: 'Half a day' },
-        { label: 'B', text: 'Full day' },
-        { label: 'C', text: 'Evening only' },
-      ],
-    },
-  ];
+  questions: Question[] = [];
 
   openDialog() {
     this.newSurveyDialog()?.open();
@@ -79,10 +37,29 @@ export class SurveyDetail {
     console.log(this.questions);
   }
 
-  // constructor() {
-  //   this.supabase.client
-  //     .from('surveys')
-  //     .select()
-  //     .then((result) => console.log(result));
-  // }
+  constructor() {
+    const surveyId = this.route.snapshot.paramMap.get('id');
+
+    this.supabase.client
+      .from('surveys')
+      .select('*, questions(*, answers(*))')
+      .eq('id', surveyId)
+      .single()
+      .then((result) => {
+        if (result.error || !result.data) {
+          console.log(result.error);
+          return;
+        }
+
+        this.questions = result.data.questions.map((q: any) => ({
+          legend: q.text,
+          hint: q.hint,
+          allowMultiple: q.allow_multiple,
+          answers: q.answers.map((a: any) => ({
+            label: a.label,
+            text: a.text,
+          })),
+        }));
+      });
+  }
 }

@@ -1,5 +1,6 @@
 import { Component, ElementRef, inject, signal, viewChild } from '@angular/core';
 import { FormArray, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Supabase } from '../../services/supabase';
 
 @Component({
   selector: 'app-new-survey',
@@ -11,6 +12,8 @@ export class NewSurvey {
   dialogRef = viewChild<ElementRef<HTMLDialogElement>>('newSurveyDialog');
   private fb = inject(FormBuilder);
   categoryOpen = signal(false);
+
+  private supabase = inject(Supabase);
 
   open() {
     this.dialogRef()?.nativeElement.showModal();
@@ -98,5 +101,61 @@ export class NewSurvey {
 
   getLetter(index: number) {
     return String.fromCharCode(65 + index);
+  }
+
+  async saveQuestions(surveyId: number) {
+    for (let i = 0; i < this.questions.length; i++) {
+      const question = this.questions.at(i);
+      const { data: savedQuestion, error: questionError } = await this.supabase.client
+        .from('questions')
+        .insert({
+          survey_id: surveyId,
+          text: question.value.questionText,
+          allow_multiple: question.value.allowMultiple,
+          position: i,
+        })
+        .select()
+        .single();
+
+      console.log(savedQuestion, questionError);
+      if (savedQuestion) {
+  await this.saveAnswers(savedQuestion.id, this.getAnswers(i));
+    }}
+  }
+
+  async saveAnswers(questionId: number, answers: FormArray) {
+    for (let i = 0; i < answers.length; i++) {
+      const answer = answers.at(i);
+      const { error: answerError } = await this.supabase.client
+      .from('answers')
+
+      .insert({
+        question_id: questionId,
+        label: this.getLetter(i),
+        text: answer.value.answerText,
+        position: i,
+      });
+      console.log(answerError);
+    }
+  }
+
+  async saveSurvey() {
+    const { data: survey, error } = await this.supabase.client
+      .from('surveys')
+      .insert({
+        title: this.surveyForm.value.surveyName,
+        description: this.surveyForm.value.description,
+        category: this.surveyForm.value.category,
+        end_date: this.surveyForm.value.endDate || null,
+      })
+      .select()
+      .single();
+
+    if (error || !survey) {
+      console.log(error);
+      return;
+    }
+    await this.saveQuestions(survey.id);
+    this.close();
   }
 }

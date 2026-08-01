@@ -81,7 +81,7 @@
       </div>
     </div>
     <ng-container formArrayName="questions">
-      @for (question of questions.controls; track question; let qIndex = $index) {
+      @for (question of questions.controls; track $index; let qIndex = $index) {
         <div class="question-block" [formGroupName]="qIndex">
           <div class="question-header">
             <label>{{ qIndex + 1 }}. Question</label>
@@ -113,7 +113,7 @@
           </div>
 
           <div formArrayName="answers">
-            @for (answer of getAnswers(qIndex).controls; track answer; let aIndex = $index) {
+            @for (answer of getAnswers(qIndex).controls; track $index; let aIndex = $index) {
               <div class="answer-row" [formGroupName]="aIndex">
                 <span>{{ getLetter(aIndex) }}.</span>
                 <input type="text" formControlName="answerText" />
@@ -141,7 +141,7 @@
     }
   </div>
 
-  <button type="button" class="publish-btn" [disabled]="surveyForm.invalid">
+  <button type="button" class="publish-btn" [disabled]="surveyForm.invalid" (click)="saveSurvey()">
     Publish
     <span class="check-icon"><img src="/icons/check.svg" alt="" /></span>
   </button>
