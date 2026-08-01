@@ -1,12 +1,13 @@
-import { Component, inject, viewChild } from '@angular/core';
+import { Component, inject, viewChild, ChangeDetectorRef } from '@angular/core';
 import { NewSurvey } from '../new-survey/new-survey';
-import { Question, Answer } from '../../models/survey.model';
+import { Question, Answer, Survey } from '../../models/survey.model';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Supabase } from '../../services/supabase';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-survey-detail',
-  imports: [NewSurvey, RouterLink],
+  imports: [NewSurvey, RouterLink, DatePipe],
   templateUrl: './survey-detail.html',
   styleUrl: './survey-detail.scss',
 })
@@ -15,8 +16,10 @@ export class SurveyDetail {
 
   private route = inject(ActivatedRoute);
   private supabase = inject(Supabase);
+  private cdr = inject(ChangeDetectorRef);
 
   questions: Question[] = [];
+  survey?: Survey;
 
   openDialog() {
     this.newSurveyDialog()?.open();
@@ -33,8 +36,49 @@ export class SurveyDetail {
     answer.selected = !wasSelected;
   }
 
-  completeSurvey() {
-    console.log(this.questions);
+  async completeSurvey() {
+    for (const question of this.questions) {
+      for (const answer of question.answers) {
+        if (answer.selected && answer.id) {
+          const { error } = await this.supabase.client
+            .from('votes')
+            .insert({ answer_id: answer.id });
+          console.log(error);
+        }
+      }
+    }
+
+    this.loadResults();
+  }
+
+  loadResults() {
+    const answerIds = this.questions.flatMap((q) => q.answers.map((a) => a.id));
+
+    this.supabase.client
+      .from('votes')
+      .select('answer_id')
+      .in('answer_id', answerIds)
+      .then((votesResult) => {
+        if (votesResult.error || !votesResult.data) {
+          return;
+        }
+
+        const counts: Record<number, number> = {};
+        for (const vote of votesResult.data) {
+          counts[vote.answer_id] = (counts[vote.answer_id] || 0) + 1;
+        }
+
+        for (const question of this.questions) {
+          const totalVotes = question.answers.reduce((sum, a) => sum + (counts[a.id!] || 0), 0);
+
+          for (const answer of question.answers) {
+            const voteCount = counts[answer.id!] || 0;
+            answer.votePercentage = totalVotes > 0 ? Math.round((voteCount / totalVotes) * 100) : 0;
+          }
+        }
+
+        this.cdr.detectChanges();
+      });
   }
 
   constructor() {
@@ -51,15 +95,26 @@ export class SurveyDetail {
           return;
         }
 
+        this.survey = {
+          id: result.data.id,
+          title: result.data.title,
+          category: result.data.category,
+          description: result.data.description,
+          endDate: result.data.end_date ? new Date(result.data.end_date) : undefined,
+        };
+
         this.questions = result.data.questions.map((q: any) => ({
           legend: q.text,
           hint: q.hint,
           allowMultiple: q.allow_multiple,
           answers: q.answers.map((a: any) => ({
+            id: a.id,
             label: a.label,
             text: a.text,
           })),
         }));
+
+        this.loadResults();
       });
   }
 }

@@ -13,14 +13,12 @@
       <section class="survey-form">
         <span class="draft-badge"> Published </span>
         <div class="meta-row">
-          <span>Ends on 01.09.2025</span>
-          <span>Category: Team activities</span>
+          <span>Ends on {{ survey?.endDate | date: 'dd.MM.yyyy' }}</span>
+          <span>Category: {{ survey?.category }}</span>
         </div>
-        <h1>Let's Plan the Next Team <br />Event Together</h1>
-        <p>
-          We want to create team activities that everyone will enjoy – share your preferences and
-          ideas in our survey to help us plan better experiences together.
-        </p>
+        <h1>{{ survey?.title }}</h1>
+
+        <p>{{ survey?.description }}</p>
         <form>
           @for (question of questions; track question; let qIndex = $index) {
             <fieldset>
@@ -53,110 +51,26 @@
       <aside class="survey-results">
         <h2>Survey results <span class="live">LIVE</span></h2>
 
+        @for (question of questions; track question) {
+          <div class="result-block">
+            <h3>{{ question.legend }}</h3>
+
+            @for (answer of question.answers; track answer) {
+              <div class="result-row">
+                <span class="option-label">{{ answer.label }}</span>
+                <div class="bar-track">
+                  <div class="bar-fill" [style.width.%]="answer.votePercentage ?? 0"></div>
+                </div>
+                <span class="percentage">{{ answer.votePercentage ?? 0 }}%</span>
+              </div>
+            }
+          </div>
+        }
+
         <!-- <div class="no-results">
           <p>Results will be shown here after participants complete the survey.</p>
           <p class="no-answers">There are no answers yet.</p>
         </div> -->
-
-        <div class="result-block">
-          <h3>1. Which date would work best for you?</h3>
-
-          <div class="result-row">
-            <span class="option-label">A</span>
-            <div class="bar-track"><div class="bar-fill" style="width: 27%"></div></div>
-            <span class="percentage">27%</span>
-          </div>
-          <div class="result-row">
-            <span class="option-label">B</span>
-            <div class="bar-track"><div class="bar-fill" style="width: 44%"></div></div>
-            <span class="percentage">44%</span>
-          </div>
-          <div class="result-row">
-            <span class="option-label">C</span>
-            <div class="bar-track"><div class="bar-fill" style="width: 3%"></div></div>
-            <span class="percentage">3%</span>
-          </div>
-          <div class="result-row">
-            <span class="option-label">D</span>
-            <div class="bar-track"><div class="bar-fill" style="width: 26%"></div></div>
-            <span class="percentage">26%</span>
-          </div>
-        </div>
-
-        <div class="result-block">
-          <h3>2. Choose the activities you prefer?</h3>
-
-          <div class="result-row">
-            <span class="option-label">A</span>
-            <div class="bar-track"><div class="bar-fill" style="width: 60%"></div></div>
-            <span class="percentage">60%</span>
-          </div>
-          <div class="result-row">
-            <span class="option-label">B</span>
-            <div class="bar-track"><div class="bar-fill" style="width: 0%"></div></div>
-            <span class="percentage">0%</span>
-          </div>
-          <div class="result-row">
-            <span class="option-label">C</span>
-            <div class="bar-track"><div class="bar-fill" style="width: 14%"></div></div>
-            <span class="percentage">14%</span>
-          </div>
-          <div class="result-row">
-            <span class="option-label">D</span>
-            <div class="bar-track"><div class="bar-fill" style="width: 26%"></div></div>
-            <span class="percentage">26%</span>
-          </div>
-          <div class="result-row">
-            <span class="option-label">E</span>
-            <div class="bar-track"><div class="bar-fill" style="width: 0%"></div></div>
-            <span class="percentage">0%</span>
-          </div>
-        </div>
-
-        <div class="result-block">
-          <h3>3. What's most important to you in a team event?</h3>
-
-          <div class="result-row">
-            <span class="option-label">A</span>
-            <div class="bar-track"><div class="bar-fill" style="width: 44%"></div></div>
-            <span class="percentage">44%</span>
-          </div>
-          <div class="result-row">
-            <span class="option-label">B</span>
-            <div class="bar-track"><div class="bar-fill" style="width: 3%"></div></div>
-            <span class="percentage">3%</span>
-          </div>
-          <div class="result-row">
-            <span class="option-label">C</span>
-            <div class="bar-track"><div class="bar-fill" style="width: 26%"></div></div>
-            <span class="percentage">26%</span>
-          </div>
-          <div class="result-row">
-            <span class="option-label">D</span>
-            <div class="bar-track"><div class="bar-fill" style="width: 27%"></div></div>
-            <span class="percentage">27%</span>
-          </div>
-        </div>
-
-        <div class="result-block">
-          <h3>4. How long would you prefer the event to last?</h3>
-
-          <div class="result-row">
-            <span class="option-label">A</span>
-            <div class="bar-track"><div class="bar-fill" style="width: 14%"></div></div>
-            <span class="percentage">14%</span>
-          </div>
-          <div class="result-row">
-            <span class="option-label">B</span>
-            <div class="bar-track"><div class="bar-fill" style="width: 86%"></div></div>
-            <span class="percentage">86%</span>
-          </div>
-          <div class="result-row">
-            <span class="option-label">C</span>
-            <div class="bar-track"><div class="bar-fill" style="width: 0%"></div></div>
-            <span class="percentage">0%</span>
-          </div>
-        </div>
       </aside>
     </div>
   </div>

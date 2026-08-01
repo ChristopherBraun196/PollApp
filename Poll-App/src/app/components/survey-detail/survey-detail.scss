@@ -213,6 +213,7 @@ fieldset {
 .complete-btn {
   grid-column: 2;
   justify-self: end;
+  align-self: flex-end;
   background-color: #ffb7704d;
   color: $color-primary-purple;
   font-family: 'Mulish';
