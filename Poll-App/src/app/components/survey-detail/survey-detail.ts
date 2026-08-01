@@ -1,7 +1,8 @@
-import { Component, viewChild } from '@angular/core';
+import { Component, inject, viewChild } from '@angular/core';
 import { NewSurvey } from '../new-survey/new-survey';
 import { Question, Answer } from '../../models/survey.model';
 import { RouterLink } from '@angular/router';
+// import { Supabase } from '../../services/supabase';
 
 @Component({
   selector: 'app-survey-detail',
@@ -11,6 +12,8 @@ import { RouterLink } from '@angular/router';
 })
 export class SurveyDetail {
   newSurveyDialog = viewChild(NewSurvey);
+
+  // private supabase = inject(Supabase);
 
   questions: Question[] = [
     {
@@ -75,4 +78,11 @@ export class SurveyDetail {
   completeSurvey() {
     console.log(this.questions);
   }
+
+  // constructor() {
+  //   this.supabase.client
+  //     .from('surveys')
+  //     .select()
+  //     .then((result) => console.log(result));
+  // }
 }
