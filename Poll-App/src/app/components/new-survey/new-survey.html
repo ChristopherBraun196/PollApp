@@ -81,7 +81,7 @@
       </div>
     </div>
     <ng-container formArrayName="questions">
-      @for (question of questions.controls; track $index; let qIndex = $index) {
+      @for (question of questions.controls; track question; let qIndex = $index) {
         <div class="question-block" [formGroupName]="qIndex">
           <div class="question-header">
             <label>{{ qIndex + 1 }}. Question</label>
@@ -113,10 +113,19 @@
           </div>
 
           <div formArrayName="answers">
-            @for (answer of getAnswers(qIndex).controls; track $index; let aIndex = $index) {
+            @for (answer of getAnswers(qIndex).controls; track answer; let aIndex = $index) {
               <div class="answer-row" [formGroupName]="aIndex">
                 <span>{{ getLetter(aIndex) }}.</span>
-                <input type="text" formControlName="answerText" />
+                <input
+                  type="text"
+                  formControlName="answerText"
+                  [placeholder]="
+                    getAnswers(qIndex).at(aIndex).get('answerText')?.invalid &&
+                    getAnswers(qIndex).at(aIndex).get('answerText')?.touched
+                      ? 'Please fill out this answer'
+                      : ''
+                  "
+                />
                 <span class="trash-btn" (click)="removeAnswer(qIndex, aIndex)">
                   <img src="/icons/trash_light.svg" alt="" class="trash-default" />
                   <img src="/icons/trash_dark.svg" alt="" class="trash-hover" />

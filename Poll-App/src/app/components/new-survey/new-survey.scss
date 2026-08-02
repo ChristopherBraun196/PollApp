@@ -454,6 +454,9 @@ textarea {
     }
   }
 
+  .answer-row input::placeholder {
+    color: #f01b1b;
+  }
   .add-answer-btn {
     display: flex;
     align-items: center;

@@ -1,4 +1,4 @@
-import { Component, ElementRef, inject, signal, viewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, inject, signal, viewChild } from '@angular/core';
 import { FormArray, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Supabase } from '../../services/supabase';
 
@@ -12,6 +12,7 @@ export class NewSurvey {
   dialogRef = viewChild<ElementRef<HTMLDialogElement>>('newSurveyDialog');
   private fb = inject(FormBuilder);
   categoryOpen = signal(false);
+  private cdr = inject(ChangeDetectorRef);
 
   private supabase = inject(Supabase);
 
@@ -25,10 +26,18 @@ export class NewSurvey {
 
   onDialogClose() {
     this.categoryOpen.set(false);
+
+    while (this.questions.length > 1) {
+      this.questions.removeAt(this.questions.length - 1);
+    }
+
+    const firstQuestionAnswers = this.getAnswers(0);
+    while (firstQuestionAnswers.length > 2) {
+      firstQuestionAnswers.removeAt(firstQuestionAnswers.length - 1);
+    }
+
     this.surveyForm.reset();
     this.surveyForm.markAsUntouched();
-    this.questions.clear();
-    this.questions.push(this.createQuestion());
   }
 
   surveyForm = this.fb.group({
@@ -54,7 +63,7 @@ export class NewSurvey {
 
   createAnswer() {
     return this.fb.group({
-      answerText: [''],
+      answerText: ['', Validators.required],
     });
   }
 
@@ -119,22 +128,23 @@ export class NewSurvey {
 
       console.log(savedQuestion, questionError);
       if (savedQuestion) {
-  await this.saveAnswers(savedQuestion.id, this.getAnswers(i));
-    }}
+        await this.saveAnswers(savedQuestion.id, this.getAnswers(i));
+      }
+    }
   }
 
   async saveAnswers(questionId: number, answers: FormArray) {
     for (let i = 0; i < answers.length; i++) {
       const answer = answers.at(i);
       const { error: answerError } = await this.supabase.client
-      .from('answers')
+        .from('answers')
 
-      .insert({
-        question_id: questionId,
-        label: this.getLetter(i),
-        text: answer.value.answerText,
-        position: i,
-      });
+        .insert({
+          question_id: questionId,
+          label: this.getLetter(i),
+          text: answer.value.answerText,
+          position: i,
+        });
       console.log(answerError);
     }
   }
