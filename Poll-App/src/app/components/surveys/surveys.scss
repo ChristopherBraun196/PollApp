@@ -62,11 +62,13 @@
 
     .span-deadline {
       align-self: flex-start;
+      text-align: center;
       margin-top: auto;
       color: $color-primary-purple;
       font-family: 'Mulish';
       font-size: 14px;
       padding: 4px 6px;
+      width: 100px;
       border-top-right-radius: 14px;
       background-color: $color-button-secondary-orange;
       margin-bottom: 44px;
@@ -95,12 +97,16 @@
       cursor: pointer;
       background-color: #fee9d4;
 
-      &:first-child {
+      &.active {
         background-color: $color-primary-orange;
       }
 
-      &:not(:first-child):hover {
+      &:hover {
         background-color: #ffcfa1;
+      }
+
+      &:focus {
+        outline: none;
       }
     }
   }
@@ -161,6 +167,9 @@
     background-color: #ffffff;
     border-radius: 12px;
     min-width: 220px;
+    &.open {
+      display: block;
+    }
 
     li {
       padding: 10px 20px;
@@ -168,6 +177,17 @@
       font-family: 'Mulish';
       cursor: pointer;
     }
+  }
+
+  .selected-category-label {
+    display: block;
+    margin-top: -6px;
+    color: #ffb770;
+    font-family: 'Mulish';
+    font-weight: 300;
+    font-size: 14px;
+    text-align: left;
+    margin-left: 16px;
   }
 }
 
@@ -179,7 +199,23 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 10px;
-    // max-width: 92%;
+    max-height: 350px;
+    overflow-y: auto;
+    padding-right: 18px;
+
+    &::-webkit-scrollbar {
+      width: 8px;
+      height: 16px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: $color-primary-orange;
+      border-radius: 999px;
+    }
   }
 
   .list-card {
@@ -214,6 +250,8 @@
       align-self: flex-end;
       margin-top: auto;
       padding: 4px 6px;
+      width: 90px;
+      text-align: center;
       border-top-right-radius: 14px;
       background-color: $color-button-secondary-orange;
       color: $color-primary-purple;

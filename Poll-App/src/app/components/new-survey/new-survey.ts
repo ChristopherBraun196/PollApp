@@ -1,4 +1,12 @@
-import { ChangeDetectorRef, Component, ElementRef, inject, signal, viewChild } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  inject,
+  signal,
+  viewChild,
+  output,
+} from '@angular/core';
 import { FormArray, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Supabase } from '../../services/supabase';
 
@@ -9,6 +17,8 @@ import { Supabase } from '../../services/supabase';
   styleUrl: './new-survey.scss',
 })
 export class NewSurvey {
+  surveyCreated = output<void>();
+
   dialogRef = viewChild<ElementRef<HTMLDialogElement>>('newSurveyDialog');
   private fb = inject(FormBuilder);
   categoryOpen = signal(false);
@@ -44,7 +54,7 @@ export class NewSurvey {
     surveyName: ['', [Validators.required, Validators.minLength(5)]],
     endDate: [''],
     description: [''],
-    category: [''],
+    category: ['', Validators.required],
     questions: this.fb.array([this.createQuestion()]),
   });
 
@@ -53,6 +63,9 @@ export class NewSurvey {
   }
 
   toggleCategory() {
+    if (this.categoryOpen()) {
+      this.surveyForm.get('category')?.markAsTouched();
+    }
     this.categoryOpen.update((open) => !open);
   }
 
@@ -166,6 +179,7 @@ export class NewSurvey {
       return;
     }
     await this.saveQuestions(survey.id);
+    this.surveyCreated.emit();
     this.close();
   }
 }

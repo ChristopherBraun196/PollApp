@@ -70,6 +70,7 @@ export class SurveyDetail {
 
         for (const question of this.questions) {
           const totalVotes = question.answers.reduce((sum, a) => sum + (counts[a.id!] || 0), 0);
+          question.totalVotes = totalVotes;
 
           for (const answer of question.answers) {
             const voteCount = counts[answer.id!] || 0;

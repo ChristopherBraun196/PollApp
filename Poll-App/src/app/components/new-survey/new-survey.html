@@ -45,6 +45,9 @@
             type="button"
             class="category-toggle"
             [class.open]="categoryOpen()"
+            [class.invalid]="
+              surveyForm.get('category')?.invalid && surveyForm.get('category')?.touched
+            "
             (click)="toggleCategory()"
           >
             Choose category
@@ -54,15 +57,21 @@
               <img src="/icons/arrow_drop_down_orange.svg" alt="" class="arrow-hover" />
             </span>
           </button>
+          @if (surveyForm.get('category')?.invalid && surveyForm.get('category')?.touched) {
+            <span class="error-text">Please select a category.</span>
+          }
 
           @if (!categoryOpen() && surveyForm.get('category')?.value) {
             <span class="selected-category">{{ surveyForm.get('category')?.value }}</span>
           }
 
           <ul class="category-list" [class.open]="categoryOpen()">
-            <li (click)="selectCategory('Team activities')">Team activities</li>
-            <li (click)="selectCategory('Gaming')">Gaming</li>
-            <li (click)="selectCategory('Healthy Lifestyle')">Healthy Lifestyle</li>
+            <li (click)="selectCategory('Team Activities')">Team Activities</li>
+            <li (click)="selectCategory('Health & Wellness')">Health & Wellness</li>
+            <li (click)="selectCategory('Gaming & Entertainment')">Gaming & Entertainment</li>
+            <li (click)="selectCategory('Education & Learning')">Education & Learning</li>
+            <li (click)="selectCategory('Lifestyle & Preferences')">Lifestyle & Preferences</li>
+            <li (click)="selectCategory('Technology & Innovation')">Technology & Innovation</li>
           </ul>
         </div>
       </div>

@@ -10,13 +10,13 @@ export interface Question {
   hint?: string;
   allowMultiple: boolean;
   answers: Answer[];
+  totalVotes?: number;
 }
 
 export interface Survey {
   id: number;
   category: string;
-  title: string; 
-  endDate?: Date; 
+  title: string;
+  endDate?: Date;
   description?: string;
-
 }

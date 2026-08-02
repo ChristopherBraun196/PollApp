@@ -1,4 +1,4 @@
-import { Component, ElementRef, viewChild } from '@angular/core';
+import { Component, output, viewChild } from '@angular/core';
 import { NewSurvey } from '../new-survey/new-survey';
 
 @Component({
@@ -9,6 +9,7 @@ import { NewSurvey } from '../new-survey/new-survey';
 })
 export class Hero {
   newSurveyDialog = viewChild(NewSurvey);
+  surveyCreated = output<void>();
 
   openDialog() {
     this.newSurveyDialog()?.open();

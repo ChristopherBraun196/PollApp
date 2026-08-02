@@ -53,24 +53,25 @@
 
         @for (question of questions; track question) {
           <div class="result-block">
-            <h3>{{ question.legend }}</h3>
-
-            @for (answer of question.answers; track answer) {
-              <div class="result-row">
-                <span class="option-label">{{ answer.label }}</span>
-                <div class="bar-track">
-                  <div class="bar-fill" [style.width.%]="answer.votePercentage ?? 0"></div>
-                </div>
-                <span class="percentage">{{ answer.votePercentage ?? 0 }}%</span>
+            @if (!question.totalVotes) {
+              <div class="no-results">
+                <p>Results will be shown here after participants complete the survey.</p>
+                <p class="no-answers">There are no answers yet.</p>
               </div>
+            } @else {
+              <h3>{{ question.legend }}</h3>
+              @for (answer of question.answers; track answer) {
+                <div class="result-row">
+                  <span class="option-label">{{ answer.label }}</span>
+                  <div class="bar-track">
+                    <div class="bar-fill" [style.width.%]="answer.votePercentage ?? 0"></div>
+                  </div>
+                  <span class="percentage">{{ answer.votePercentage ?? 0 }}%</span>
+                </div>
+              }
             }
           </div>
         }
-
-        <!-- <div class="no-results">
-          <p>Results will be shown here after participants complete the survey.</p>
-          <p class="no-answers">There are no answers yet.</p>
-        </div> -->
       </aside>
     </div>
   </div>

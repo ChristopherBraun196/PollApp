@@ -15,11 +15,13 @@
 
 <section class="section-three">
   <div class="filter-buttons">
-    <button>Active survey</button>
-    <button>Past survey</button>
+    <button [class.active]="activeTab === 'active'" (click)="setTab('active')">
+      Active survey
+    </button>
+    <button [class.active]="activeTab === 'past'" (click)="setTab('past')">Past survey</button>
   </div>
   <div class="sort-dropdown">
-    <button class="sort-toggle">
+    <button class="sort-toggle" (click)="toggleCategoryDropdown()">
       Sort by categories
       <span class="arrow-wrapper">
         <img src="/icons/arrow_drop_down.svg" alt="" class="arrow-default" />
@@ -27,20 +29,24 @@
       </span>
     </button>
 
-    <ul class="sort-list">
-      <li>Team Activities</li>
-      <li>Health & Wellness</li>
-      <li>Gaming & Entertainment</li>
-      <li>Education & Learning</li>
-      <li>Lifestyle & Preferences</li>
-      <li>Technology & Innovation</li>
+    @if (!categoryOpen && selectedCategory) {
+      <span class="selected-category-label">{{ selectedCategory }}</span>
+    }
+    <ul class="sort-list" [class.open]="categoryOpen">
+      <li (click)="selectCategory(null)">All Surveys</li>
+      <li (click)="selectCategory('Team Activities')">Team Activities</li>
+      <li (click)="selectCategory('Health & Wellness')">Health & Wellness</li>
+      <li (click)="selectCategory('Gaming & Entertainment')">Gaming & Entertainment</li>
+      <li (click)="selectCategory('Education & Learning')">Education & Learning</li>
+      <li (click)="selectCategory('Lifestyle & Preferences')">Lifestyle & Preferences</li>
+      <li (click)="selectCategory('Technology & Innovation')">Technology & Innovation</li>
     </ul>
   </div>
 </section>
 
 <section class="section-four">
   <div class="survey-grid">
-    @for (survey of surveys; track survey.id) {
+    @for (survey of filteredSurveys; track survey.id) {
       <a class="list-card" [routerLink]="'/survey/' + survey.id">
         <span class="span-category">{{ survey.category }}</span>
         <h3>{{ survey.title }}</h3>
