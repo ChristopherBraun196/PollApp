@@ -1,7 +1,7 @@
 import { Component, inject, viewChild, ChangeDetectorRef } from '@angular/core';
 import { NewSurvey } from '../new-survey/new-survey';
 import { Question, Answer, Survey } from '../../models/survey.model';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Supabase } from '../../services/supabase';
 import { DatePipe } from '@angular/common';
 
@@ -17,9 +17,18 @@ export class SurveyDetail {
   private route = inject(ActivatedRoute);
   private supabase = inject(Supabase);
   private cdr = inject(ChangeDetectorRef);
+  private router = inject(Router);
 
   questions: Question[] = [];
   survey?: Survey;
+
+
+  get isPast(): boolean {
+    if (!this.survey?.endDate) {
+      return false;
+    }
+    return Math.ceil((this.survey.endDate.getTime() - Date.now()) / (100 * 60 * 60 * 24)) < 0;
+  }
 
   openDialog() {
     this.newSurveyDialog()?.open();
@@ -92,10 +101,10 @@ export class SurveyDetail {
       .single()
       .then((result) => {
         if (result.error || !result.data) {
-          console.log(result.error);
+          this.router.navigateByUrl('/not-found', { skipLocationChange: true });
           return;
         }
-
+       
         this.survey = {
           id: result.data.id,
           title: result.data.title,

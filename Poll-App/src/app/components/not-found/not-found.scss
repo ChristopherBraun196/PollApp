@@ -1,0 +1,33 @@
+@use '../../../styles/variables' as *;
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  text-align: center;
+
+  h1 {
+    font-family: $font-heading;
+    color: $color-primary-orange;
+    font-size: 6rem;
+    line-height: 0.9;
+    margin: 0;
+  }
+
+  p {
+    font-family: $font-body;
+    color: #ffffff;
+    font-size: 20px;
+    margin-top: 1rem;
+  }
+
+  a {
+    margin-top: 1.5rem;
+    color: $color-primary-orange;
+    font-family: $font-body;
+    font-weight: 700;
+    text-decoration: none;
+  }
+}

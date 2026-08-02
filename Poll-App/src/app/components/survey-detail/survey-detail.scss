@@ -201,6 +201,11 @@ fieldset {
         border-color: $color-primary-orange;
         background-image: url('/icons/check.svg');
       }
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
     }
 
     span {
@@ -227,6 +232,10 @@ fieldset {
 
   &:hover {
     background-color: $color-button-secondary-orange;
+  }
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 }
 

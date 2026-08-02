@@ -32,6 +32,7 @@
                   <input
                     type="checkbox"
                     [checked]="!!answer.selected"
+                    [disabled]="isPast"
                     (change)="toggleAnswer(question, answer)"
                   />
                   <span
@@ -42,7 +43,7 @@
             </fieldset>
           }
 
-          <button type="button" class="complete-btn" (click)="completeSurvey()">
+          <button type="button" class="complete-btn" (click)="completeSurvey()" [disabled]="isPast">
             Complete survey
           </button>
         </form>
