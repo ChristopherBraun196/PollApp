@@ -42,7 +42,6 @@ export class Surveys {
       .select('*')
       .then((result) => {
         if (result.error || !result.data) {
-          console.log(result.error);
           return;
         }
 
@@ -97,7 +96,6 @@ export class Surveys {
     }
     const days = Math.ceil((endDate.getTime() - Date.now()) / (1000 * 60 * 60 * 24));
     if (days < 0) {
-      const daysAgo = Math.abs(days);
       return 'Ended';
     }
     if (days === 0) return 'Ends today';

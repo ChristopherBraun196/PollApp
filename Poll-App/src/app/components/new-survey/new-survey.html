@@ -8,7 +8,7 @@
   <div class="dialog-header">
     <h2>Create new survey</h2>
     <button type="button" class="cancel-btn" (click)="close()">
-      Cancel <img src="/icons/close.svg" alt="" />
+      Cancel <img src="icons/close.svg" alt="" />
     </button>
   </div>
 
@@ -19,8 +19,8 @@
         <div class="input-with-icon">
           <input id="survey-name" type="text" formControlName="surveyName" />
           <span class="trash-btn" (click)="surveyForm.get('surveyName')?.reset()">
-            <img src="/icons/trash_light.svg" alt="" class="trash-default" />
-            <img src="/icons/trash_dark.svg" alt="" class="trash-hover" />
+            <img src="icons/trash_light.svg" alt="" class="trash-default" />
+            <img src="icons/trash_dark.svg" alt="" class="trash-hover" />
           </span>
         </div>
         @if (surveyForm.get('surveyName')?.invalid && surveyForm.get('surveyName')?.touched) {
@@ -34,8 +34,8 @@
           <div class="input-with-icon">
             <input id="end-date" type="date" formControlName="endDate" />
             <span class="trash-btn" (click)="surveyForm.get('endDate')?.reset()">
-              <img src="/icons/trash_light.svg" alt="" class="trash-default" />
-              <img src="/icons/trash_dark.svg" alt="" class="trash-hover" />
+              <img src="icons/trash_light.svg" alt="" class="trash-default" />
+              <img src="icons/trash_dark.svg" alt="" class="trash-hover" />
             </span>
           </div>
         </div>
@@ -43,7 +43,7 @@
         <div class="field category-field">
           <button
             type="button"
-            class="category-toggle"
+            class="category-toggle arrow-toggle"
             [class.open]="categoryOpen()"
             [class.invalid]="
               surveyForm.get('category')?.invalid && surveyForm.get('category')?.touched
@@ -53,8 +53,8 @@
             Choose category
 
             <span class="arrow-wrapper">
-              <img src="/icons/arrow_drop_down.svg" alt="" class="arrow-default" />
-              <img src="/icons/arrow_drop_down_orange.svg" alt="" class="arrow-hover" />
+              <img src="icons/arrow_drop_down.svg" alt="" class="arrow-default" />
+              <img src="icons/arrow_drop_down_orange.svg" alt="" class="arrow-hover" />
             </span>
           </button>
           @if (surveyForm.get('category')?.invalid && surveyForm.get('category')?.touched) {
@@ -83,8 +83,8 @@
         <div class="input-with-icon">
           <textarea id="description" formControlName="description"></textarea>
           <span class="trash-btn" (click)="surveyForm.get('description')?.reset()">
-            <img src="/icons/trash_light.svg" alt="" class="trash-default" />
-            <img src="/icons/trash_dark.svg" alt="" class="trash-hover" />
+            <img src="icons/trash_light.svg" alt="" class="trash-default" />
+            <img src="icons/trash_dark.svg" alt="" class="trash-hover" />
           </span>
         </div>
       </div>
@@ -95,8 +95,8 @@
           <div class="question-header">
             <label>{{ qIndex + 1 }}. Question</label>
             <span class="trash-btn" (click)="removeQuestion(qIndex)">
-              <img src="/icons/trash_light.svg" alt="" class="trash-default" />
-              <img src="/icons/trash_dark.svg" alt="" class="trash-hover" />
+              <img src="icons/trash_light.svg" alt="" class="trash-default" />
+              <img src="icons/trash_dark.svg" alt="" class="trash-hover" />
             </span>
           </div>
           <div class="question-field">
@@ -136,8 +136,8 @@
                   "
                 />
                 <span class="trash-btn" (click)="removeAnswer(qIndex, aIndex)">
-                  <img src="/icons/trash_light.svg" alt="" class="trash-default" />
-                  <img src="/icons/trash_dark.svg" alt="" class="trash-hover" />
+                  <img src="icons/trash_light.svg" alt="" class="trash-default" />
+                  <img src="icons/trash_dark.svg" alt="" class="trash-hover" />
                 </span>
               </div>
             }
@@ -145,7 +145,7 @@
 
           @if (getAnswers(qIndex).controls.length < 6) {
             <button type="button" class="add-answer-btn" (click)="addAnswer(qIndex)">
-              Add answer <img src="/icons/add_circle.svg" alt="" />
+              Add answer <img src="icons/add_circle.svg" alt="" />
             </button>
           }
         </div>
@@ -154,13 +154,26 @@
 
     @if (questions.length < 4) {
       <button type="button" class="add-question-btn" (click)="addQuestion()">
-        Add next question <img src="/icons/add_circle.svg" alt="" />
+        Add next question <img src="icons/add_circle.svg" alt="" />
       </button>
     }
   </div>
 
-  <button type="button" class="publish-btn" [disabled]="surveyForm.invalid" (click)="saveSurvey()">
+  <button
+    #publishBtn
+    type="button"
+    class="publish-btn"
+    [class.disabled]="surveyForm.invalid"
+    (click)="saveSurvey()"
+  >
     Publish
-    <span class="check-icon"><img src="/icons/check.svg" alt="" /></span>
+    <span class="check-icon"><img src="icons/check.svg" alt="" /></span>
   </button>
 </dialog>
+
+<div class="toast" popover="manual" #toastEl>
+  <span>Your survey is now published</span>
+  <button type="button" (click)="hideToast()">
+    <img src="icons/close.svg" alt="" />
+  </button>
+</div>

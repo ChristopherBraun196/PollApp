@@ -1,12 +1,4 @@
-import {
-  ChangeDetectorRef,
-  Component,
-  ElementRef,
-  inject,
-  signal,
-  viewChild,
-  output,
-} from '@angular/core';
+import { Component, ElementRef, inject, signal, viewChild, output } from '@angular/core';
 import { FormArray, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Supabase } from '../../services/supabase';
 
@@ -20,9 +12,10 @@ export class NewSurvey {
   surveyCreated = output<void>();
 
   dialogRef = viewChild<ElementRef<HTMLDialogElement>>('newSurveyDialog');
+  toastEl = viewChild<ElementRef<HTMLDivElement>>('toastEl');
+  publishBtn = viewChild<ElementRef<HTMLButtonElement>>('publishBtn');
   private fb = inject(FormBuilder);
   categoryOpen = signal(false);
-  private cdr = inject(ChangeDetectorRef);
 
   private supabase = inject(Supabase);
 
@@ -32,6 +25,24 @@ export class NewSurvey {
 
   close() {
     this.dialogRef()?.nativeElement.close();
+  }
+
+  showToast() {
+    const toast = this.toastEl()?.nativeElement;
+    const btn = this.publishBtn()?.nativeElement;
+    if (!toast || !btn) {
+      return;
+    }
+
+    const rect = btn.getBoundingClientRect();
+    toast.style.top = rect.top + 'px';
+    toast.style.left = rect.left + 'px';
+
+    (toast as any).showPopover();
+  }
+
+  hideToast() {
+    (this.toastEl()?.nativeElement as any)?.hidePopover();
   }
 
   onDialogClose() {
@@ -139,7 +150,6 @@ export class NewSurvey {
         .select()
         .single();
 
-      console.log(savedQuestion, questionError);
       if (savedQuestion) {
         await this.saveAnswers(savedQuestion.id, this.getAnswers(i));
       }
@@ -158,11 +168,14 @@ export class NewSurvey {
           text: answer.value.answerText,
           position: i,
         });
-      console.log(answerError);
     }
   }
 
   async saveSurvey() {
+    this.surveyForm.markAllAsTouched();
+    if (this.surveyForm.invalid) {
+      return;
+    }
     const { data: survey, error } = await this.supabase.client
       .from('surveys')
       .insert({
@@ -175,11 +188,14 @@ export class NewSurvey {
       .single();
 
     if (error || !survey) {
-      console.log(error);
       return;
     }
     await this.saveQuestions(survey.id);
     this.surveyCreated.emit();
-    this.close();
+    this.showToast();
+    setTimeout(() => {
+      this.hideToast();
+      this.close();
+    }, 2000);
   }
 }

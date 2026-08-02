@@ -22,12 +22,11 @@ export class SurveyDetail {
   questions: Question[] = [];
   survey?: Survey;
 
-
   get isPast(): boolean {
     if (!this.survey?.endDate) {
       return false;
     }
-    return Math.ceil((this.survey.endDate.getTime() - Date.now()) / (100 * 60 * 60 * 24)) < 0;
+    return Math.ceil((this.survey.endDate.getTime() - Date.now()) / (1000 * 60 * 60 * 24)) < 0;
   }
 
   openDialog() {
@@ -52,7 +51,6 @@ export class SurveyDetail {
           const { error } = await this.supabase.client
             .from('votes')
             .insert({ answer_id: answer.id });
-          console.log(error);
         }
       }
     }
@@ -104,7 +102,7 @@ export class SurveyDetail {
           this.router.navigateByUrl('/not-found', { skipLocationChange: true });
           return;
         }
-       
+
         this.survey = {
           id: result.data.id,
           title: result.data.title,

@@ -17,3 +17,30 @@ button {
 html:has(dialog[open]) {
   overflow: hidden;
 }
+
+.arrow-toggle {
+  .arrow-wrapper {
+    position: relative;
+    width: 15px;
+    height: 8px;
+    display: inline-block;
+  }
+
+  .arrow-wrapper img {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .arrow-hover {
+    opacity: 0;
+  }
+
+  &:hover .arrow-default {
+    opacity: 0;
+  }
+
+  &:hover .arrow-hover {
+    opacity: 1;
+  }
+}
