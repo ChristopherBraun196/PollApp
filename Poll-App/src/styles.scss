@@ -8,6 +8,10 @@ body {
   margin: 0 auto;
   padding-inline: 5rem;
   box-sizing: border-box;
+
+  @media (max-width: 767px) {
+    padding-inline: 10px;
+  }
 }
 
 button {

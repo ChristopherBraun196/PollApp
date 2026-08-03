@@ -2,12 +2,22 @@
 
 .section-two {
   padding-inline: 180px;
+
+  @media (max-width: 767px) {
+    padding-inline: 0;
+  }
+
   h2 {
     color: $color-primary-orange;
     font-family: $font-heading;
     font-size: 4.5rem;
     text-align: center;
     margin: 40px 0;
+
+    @media (max-width: 767px) {
+      padding-top: 2.75rem;
+      font-size: 2.75rem;
+    }
   }
 
   p {
@@ -16,12 +26,21 @@
     font-family: 'Mulish';
     font-weight: 200;
     margin: 0 0 20px 0;
+
+    @media (max-width: 767px) {
+      font-size: 21px;
+    }
   }
 
   .ending-surveys {
     display: flex;
     flex-direction: row;
     gap: 20px;
+
+    @media (max-width: 767px) {
+      overflow-x: auto;
+      padding-bottom: 8px;
+    }
   }
 
   .survey-card {
@@ -36,6 +55,13 @@
     cursor: pointer;
     text-decoration: none;
 
+    @media (max-width: 767px) {
+      flex: 0 0 180px;
+      min-width: 180px;
+      height: 200px;
+      padding-left: 15px;
+    }
+
     &:hover {
       background-color: #f4e9fb;
     }
@@ -46,6 +72,11 @@
       padding-top: 34px;
       font-family: 'Mulish';
       font-size: 14px;
+
+      @media (max-width: 767px) {
+        padding-left: 0;
+        font-size: 12px;
+      }
     }
 
     h3 {
@@ -58,6 +89,11 @@
       justify-content: flex-end;
       align-items: center;
       margin-top: 8px;
+
+      @media (max-width: 767px) {
+        padding-left: 0;
+        font-size: 20px;
+      }
     }
 
     .span-deadline {
@@ -72,6 +108,14 @@
       border-top-right-radius: 14px;
       background-color: $color-button-secondary-orange;
       margin-bottom: 44px;
+
+      @media (max-width: 767px) {
+        margin-bottom: 16px;
+        font-size: 12px;
+        padding: 3px 5px;
+        width: 85px;
+        text-align: start;
+      }
     }
   }
 }
@@ -81,38 +125,55 @@
   align-items: center;
   margin-top: 40px;
 
+  @media (max-width: 767px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
   .filter-buttons {
     display: flex;
     gap: 12px;
     padding-left: 180px;
 
-    button {
-      border: none;
-      border-radius: 20px;
-      padding: 8px 20px;
-      font-family: 'Mulish';
-      font-weight: 700;
-      font-size: 16px;
-      color: $color-primary-purple;
-      cursor: pointer;
-      background-color: #fee9d4;
+    @media (max-width: 767px) {
+      padding-left: 0;
+    }
+  }
 
-      &.active {
-        background-color: $color-primary-orange;
-      }
+  button {
+    border: none;
+    border-radius: 20px;
+    padding: 8px 20px;
+    font-family: 'Mulish';
+    font-weight: 700;
+    font-size: 16px;
+    color: $color-primary-purple;
+    cursor: pointer;
+    background-color: #fee9d4;
 
-      &:hover {
-        background-color: #ffcfa1;
-      }
+    @media (max-width: 767px) {
+      padding: 4px 10px;
+      font-size: 12px;
+    }
 
-      &:focus {
-        outline: none;
-      }
+    &.active {
+      background-color: $color-primary-orange;
+    }
+
+    &:hover {
+      background-color: #ffcfa1;
+    }
+
+    &:focus {
+      outline: none;
     }
   }
 }
+
 .sort-dropdown {
   position: relative;
+
   .sort-toggle {
     display: flex;
     align-items: center;
@@ -126,6 +187,11 @@
     font-weight: 700;
     font-size: 16px;
     margin-right: 180px;
+
+    @media (max-width: 767px) {
+      margin-right: 0;
+      margin-top: 35px;
+    }
 
     &:hover {
       background-color: #d9d9d91f;
@@ -142,6 +208,13 @@
     background-color: #ffffff;
     border-radius: 12px;
     min-width: 220px;
+
+    @media (max-width: 767px) {
+      right: -25px;
+      margin-top: 6px;
+      min-width: 203px;
+    }
+
     &.open {
       display: block;
     }
@@ -151,6 +224,9 @@
       color: $color-primary-purple;
       font-family: 'Mulish';
       cursor: pointer;
+      @media (max-width: 767px) {
+        padding: 10px 20px 10px 28px;
+      }
     }
   }
 
@@ -170,6 +246,11 @@
   padding-inline: 180px;
   margin-top: 40px;
 
+  @media (max-width: 767px) {
+    padding-inline: 0;
+    margin-top: 16px;
+  }
+
   .survey-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -177,6 +258,13 @@
     max-height: 350px;
     overflow-y: auto;
     padding-right: 18px;
+
+    @media (max-width: 767px) {
+      grid-template-columns: 1fr;
+      max-height: none;
+      overflow-y: visible;
+      padding-right: 0;
+    }
 
     &::-webkit-scrollbar {
       width: 8px;
@@ -202,6 +290,10 @@
     min-height: 80px;
     cursor: pointer;
     text-decoration: none;
+
+    @media (max-width: 767px) {
+      min-height: 100px;
+    }
 
     &:hover {
       background-color: #d9d9d929;
