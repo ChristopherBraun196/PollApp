@@ -2,7 +2,8 @@
 
 .section-one {
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: auto auto;
+  justify-content: flex-start;
   grid-template-areas:
     'heading image'
     'text    image';
@@ -11,6 +12,7 @@
 
   @media (max-width: 767px) {
     grid-template-columns: 1fr;
+    justify-content: normal;
     grid-template-areas:
       'heading'
       'image'

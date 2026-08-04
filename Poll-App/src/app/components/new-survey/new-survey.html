@@ -4,11 +4,11 @@
   [formGroup]="surveyForm"
   (close)="onDialogClose()"
 >
-  <span class="draft-badge">Draft</span>
   <div class="dialog-header">
+    <span class="draft-badge">Draft</span>
     <h2>Create new survey</h2>
     <button type="button" class="cancel-btn" (click)="close()">
-      Cancel <img src="icons/close.svg" alt="" />
+      <span class="cancel-text">Cancel</span> <img src="icons/close.svg" alt="Close Icon" />
     </button>
   </div>
 
@@ -16,12 +16,12 @@
     <div class="form-column-left">
       <div class="field">
         <label for="survey-name">Survey name</label>
+        <span class="trash-btn" (click)="surveyForm.get('surveyName')?.reset()">
+          <img src="icons/trash_light.svg" alt="" class="trash-default" />
+          <img src="icons/trash_dark.svg" alt="" class="trash-hover" />
+        </span>
         <div class="input-with-icon">
           <input id="survey-name" type="text" formControlName="surveyName" />
-          <span class="trash-btn" (click)="surveyForm.get('surveyName')?.reset()">
-            <img src="icons/trash_light.svg" alt="" class="trash-default" />
-            <img src="icons/trash_dark.svg" alt="" class="trash-hover" />
-          </span>
         </div>
         @if (surveyForm.get('surveyName')?.invalid && surveyForm.get('surveyName')?.touched) {
           <span class="error-text">Please enter at least 5 characters.</span>
@@ -31,12 +31,12 @@
       <div class="field-row">
         <div class="field">
           <label for="end-date">Set end date <span class="optional">(optional)</span></label>
+          <span class="trash-btn" (click)="surveyForm.get('endDate')?.reset()">
+            <img src="icons/trash_light.svg" alt="" class="trash-default" />
+            <img src="icons/trash_dark.svg" alt="" class="trash-hover" />
+          </span>
           <div class="input-with-icon">
             <input id="end-date" type="date" formControlName="endDate" />
-            <span class="trash-btn" (click)="surveyForm.get('endDate')?.reset()">
-              <img src="icons/trash_light.svg" alt="" class="trash-default" />
-              <img src="icons/trash_dark.svg" alt="" class="trash-hover" />
-            </span>
           </div>
         </div>
 
@@ -80,12 +80,12 @@
     <div class="form-column-right">
       <div class="field">
         <label for="description">Describing text <span class="optional">(optional)</span></label>
+        <span class="trash-btn" (click)="surveyForm.get('description')?.reset()">
+          <img src="icons/trash_light.svg" alt="" class="trash-default" />
+          <img src="icons/trash_dark.svg" alt="" class="trash-hover" />
+        </span>
         <div class="input-with-icon">
           <textarea id="description" formControlName="description"></textarea>
-          <span class="trash-btn" (click)="surveyForm.get('description')?.reset()">
-            <img src="icons/trash_light.svg" alt="" class="trash-default" />
-            <img src="icons/trash_dark.svg" alt="" class="trash-hover" />
-          </span>
         </div>
       </div>
     </div>
