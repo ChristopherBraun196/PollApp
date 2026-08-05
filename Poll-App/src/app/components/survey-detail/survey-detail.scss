@@ -13,9 +13,19 @@ main {
     margin: 0 auto;
     padding-inline: 5rem;
 
+    @media (max-width: 767px) {
+      padding-inline: 10px;
+    }
+
     .logo {
       padding-top: 1.5rem;
       height: 40px;
+
+      @media (max-width: 767px) {
+        padding-top: 2.5rem;
+        padding-bottom: 1.5rem;
+        height: 50px;
+      }
     }
   }
 }
@@ -43,6 +53,10 @@ main {
   border: none;
   margin-top: 1.5rem;
   transition: background-color 0.3s ease-in-out;
+
+  @media (max-width: 767px) {
+    display: none;
+  }
 
   .plus-icon {
     display: flex;
@@ -129,6 +143,11 @@ main {
   align-items: start;
   gap: 40px;
   margin-top: 24px;
+
+  @media (max-width: 767px) {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
 }
 
 form {
