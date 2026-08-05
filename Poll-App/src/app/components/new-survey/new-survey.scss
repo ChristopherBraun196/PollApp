@@ -7,22 +7,6 @@
   background-color: $color-primary-purple;
   width: 1000px;
 
-  @media (max-width: 767px) {
-    width: calc(100vw - 32px);
-    padding: 28px;
-    border-radius: 0px 48px 0px 0px;
-    transform: translateY(100%);
-    margin-top: 115px;
-
-    &[open] {
-      transform: translateY(0);
-
-      @starting-style {
-        transform: translateY(100%);
-      }
-    }
-  }
-
   transition:
     opacity 0.3s ease,
     transform 0.3s ease,
@@ -64,6 +48,8 @@
     padding: 28px;
     border-radius: 0px 48px 0px 0px;
     margin-top: 115px;
+    max-height: calc(100vh - 150px);
+    overflow-y: auto;
     transform: translateY(60px);
 
     &[open] {
@@ -408,7 +394,6 @@
       opacity: 1;
     }
   }
-
 }
 
 input.ng-invalid.ng-touched {
@@ -458,12 +443,17 @@ textarea {
 
     @media (max-width: 767px) {
       gap: 8px;
+      justify-content: space-between;
     }
 
     label {
       font-weight: 700;
       line-height: 36px;
       font-size: 1.25rem;
+
+      @media (max-width: 767pc) {
+        font-size: 1rem;
+      }
     }
   }
 
@@ -473,11 +463,16 @@ textarea {
     width: 380px;
 
     @media (max-width: 767px) {
-      width: 100%;
+      width: 90%;
       height: 20px;
+
+      &::placeholder {
+        @media (max-width: 767px) {
+          font-size: 0.75rem;
+        }
+      }
     }
   }
-
   .question-field {
     position: relative;
     margin-bottom: 16px;
@@ -508,6 +503,7 @@ textarea {
 
     @media (max-width: 767px) {
       gap: 8px;
+      justify-content: space-between;
     }
 
     .checkbox-label {
@@ -557,9 +553,23 @@ textarea {
     margin-bottom: 12px;
     position: relative;
 
+    @media (max-width: 767px) {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      grid-template-areas:
+        'letter trash'
+        'input input';
+      gap: 4px 8px;
+    }
+
     span:not(.trash-btn) {
       width: 20px;
       font-size: 1.25rem;
+
+      @media (max-width: 767px) {
+        grid-area: letter;
+        font-size: 1rem;
+      }
     }
 
     input {
@@ -568,8 +578,16 @@ textarea {
       margin-bottom: 0;
 
       @media (max-width: 767px) {
+        grid-area: input;
         min-width: 0;
         max-width: none;
+        width: 92%;
+      }
+    }
+
+    .trash-btn {
+      @media (max-width: 767px) {
+        grid-area: trash;
       }
     }
   }
@@ -596,6 +614,13 @@ textarea {
     margin-left: 36px;
     align-self: flex-start;
     transition: background-color 0.2s ease-in-out;
+
+    @media (max-width: 767px) {
+      font-size: 1rem;
+      text-align: left;
+      align-items: flex-start;
+      margin-left: 0;
+    }
 
     img {
       height: 18px;
@@ -624,6 +649,16 @@ textarea {
   padding: 10px 20px;
   cursor: pointer;
 
+  @media (max-width: 767px) {
+    justify-self: center;
+    align-self: center;
+    margin-top: 24px;
+    padding: 8px 16px;
+    font-size: 0.875rem;
+    margin-bottom: 24px;
+    margin-top: 60px;
+  }
+
   img {
     height: 18px;
     filter: brightness(0) invert(1);
@@ -647,6 +682,21 @@ textarea {
   border-radius: 10px;
   padding: 10px 24px;
   transition: background-color 0.3s ease-in-out;
+  margin-bottom: 50px;
+
+  @media (max-width: 767px) {
+    margin: 24px auto 0;
+    padding: 8px 18px;
+    font-size: 1rem;
+    background-color: $color-primary-orange;
+    margin-top: 50px;
+
+    .check-icon {
+      width: 18px;
+      margin-left: 8px;
+      opacity: 1;
+    }
+  }
 
   .check-icon {
     display: flex;
@@ -660,11 +710,16 @@ textarea {
       margin-left 0.3s ease-in-out,
       opacity 0.3s ease-in-out;
 
+    @media (max-width: 767px) {
+      width: 18px;
+      margin-left: 8px;
+      opacity: 1;
+    }
+
     img {
       height: 14px;
     }
   }
-
   &:hover {
     background-color: $color-primary-orange;
 
