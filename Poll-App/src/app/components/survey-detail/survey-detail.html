@@ -12,6 +12,9 @@
     <div class="survey-layout">
       <section class="survey-form">
         <span class="draft-badge"> Published </span>
+        <a routerLink="/" class="close-btn">
+          <img src="icons/close.svg" alt="Close" />
+        </a>
         <div class="meta-row">
           <span>Ends on {{ survey?.endDate | date: 'dd.MM.yyyy' }}</span>
           <span>Category: {{ survey?.category }}</span>
@@ -46,32 +49,48 @@
           <button type="button" class="complete-btn" (click)="completeSurvey()" [disabled]="isPast">
             Complete survey
           </button>
+          <button
+            type="button"
+            class="complete-btn-mobile"
+            (click)="completeSurvey()"
+            [disabled]="isPast"
+          >
+            Complete
+            <span class="check-icon"><img src="icons/check.svg" alt="" /></span>
+          </button>
         </form>
       </section>
 
       <aside class="survey-results">
-        <h2>Survey results <span class="live">LIVE</span></h2>
+        <button type="button" class="results-toggle" (click)="toggleResults()">
+          {{ resultsOpen() ? 'Close results' : 'Show results' }}
+          <span class="toggle-arrow" [class.open]="resultsOpen()">▲</span>
+        </button>
 
-        @for (question of questions; track question) {
-          <div class="result-block">
-            @if (!question.totalVotes) {
-              <div class="no-results">
-                <p>Results will be shown here after participants complete the survey.</p>
-                <p class="no-answers">There are no answers yet.</p>
-              </div>
-            } @else {
-              <h3>{{ question.legend }}</h3>
-              @for (answer of question.answers; track answer) {
-                <div class="result-row">
-                  <span class="option-label">{{ answer.label }}</span>
-                  <div class="bar-track">
-                    <div class="bar-fill" [style.width.%]="answer.votePercentage ?? 0"></div>
-                  </div>
-                  <span class="percentage">{{ answer.votePercentage ?? 0 }}%</span>
+        @if (resultsOpen()) {
+          <h2>Survey results <span class="live">LIVE</span></h2>
+
+          @for (question of questions; track question) {
+            <div class="result-block">
+              @if (!question.totalVotes) {
+                <div class="no-results">
+                  <p>Results will be shown here after participants complete the survey.</p>
+                  <p class="no-answers">There are no answers yet.</p>
                 </div>
+              } @else {
+                <h3>{{ question.legend }}</h3>
+                @for (answer of question.answers; track answer) {
+                  <div class="result-row">
+                    <span class="option-label">{{ answer.label }}</span>
+                    <div class="bar-track">
+                      <div class="bar-fill" [style.width.%]="answer.votePercentage ?? 0"></div>
+                    </div>
+                    <span class="percentage">{{ answer.votePercentage ?? 0 }}%</span>
+                  </div>
+                }
               }
-            }
-          </div>
+            </div>
+          }
         }
       </aside>
     </div>

@@ -1,4 +1,4 @@
-import { Component, inject, viewChild, ChangeDetectorRef } from '@angular/core';
+import { Component, inject, signal, viewChild, ChangeDetectorRef } from '@angular/core';
 import { NewSurvey } from '../new-survey/new-survey';
 import { Question, Answer, Survey } from '../../models/survey.model';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
@@ -21,6 +21,7 @@ export class SurveyDetail {
 
   questions: Question[] = [];
   survey?: Survey;
+  resultsOpen = signal(true);
 
   get isPast(): boolean {
     if (!this.survey?.endDate) {
@@ -31,6 +32,10 @@ export class SurveyDetail {
 
   openDialog() {
     this.newSurveyDialog()?.open();
+  }
+
+  toggleResults(){
+    this.resultsOpen.update((open) => !open);
   }
 
   toggleAnswer(question: Question, answer: Answer) {
