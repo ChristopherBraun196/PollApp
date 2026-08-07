@@ -13,7 +13,7 @@ main {
     margin: 0 auto;
     padding-inline: 5rem;
 
-    @media (max-width: 767px) {
+    @media (max-width: 1366px) {
       padding-inline: 10px;
     }
 
@@ -21,7 +21,7 @@ main {
       padding-top: 1.5rem;
       height: 40px;
 
-      @media (max-width: 767px) {
+      @media (max-width: 1366px) {
         padding-top: 2.5rem;
         padding-bottom: 1.5rem;
         height: 50px;
@@ -54,7 +54,7 @@ main {
   margin-top: 1.5rem;
   transition: background-color 0.3s ease-in-out;
 
-  @media (max-width: 767px) {
+  @media (max-width: 1366px) {
     display: none;
   }
 
@@ -100,7 +100,7 @@ main {
     display: none;
     
 
-    @media (max-width: 767px) {
+    @media (max-width: 1366px) {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -134,7 +134,7 @@ main {
     margin: 34px 0px 4px 34px;
     width: 90px;
 
-    @media (max-width: 767px) {
+    @media (max-width: 1366px) {
       font-size: 13px;
       padding: 3px 5px;
       width: 70px;
@@ -151,7 +151,7 @@ main {
     font-family: 'Mulish';
     font-size: 14px;
 
-    @media (max-width: 767px) {
+    @media (max-width: 1366px) {
       padding-left: 10px;
       padding-right: 10px;
       flex-direction: row;
@@ -170,7 +170,7 @@ main {
     padding-left: 34px;
     margin-top: 15px;
 
-    @media (max-width: 767px) {
+    @media (max-width: 1366px) {
       font-size: 2.5rem;
       padding-left: 10px;
     }
@@ -183,7 +183,7 @@ main {
     font-size: 17px;
     font-weight: 300;
 
-    @media (max-width: 767px) {
+    @media (max-width: 1366px) {
       padding-inline: 10px;
       margin-top: 8px;
     }
@@ -197,7 +197,7 @@ main {
   gap: 40px;
   margin-top: 24px;
 
-  @media (max-width: 767px) {
+  @media (max-width: 1366px) {
     grid-template-columns: 1fr;
     gap: 24px;
   }
@@ -210,7 +210,7 @@ form {
   margin-top: 16px;
   padding-inline: 34px;
 
-  @media (max-width: 767px) {
+  @media (max-width: 1366px) {
     grid-template-columns: 1fr;
     padding-inline: 10px;
     gap: 24px;
@@ -289,7 +289,7 @@ fieldset {
     span {
       padding-left: 1.2em;
       text-indent: -1.2em;
-      @media (max-width: 767px) {
+      @media (max-width: 1366px) {
         grid-column: 1;
         justify-self: center;
       }
@@ -312,7 +312,7 @@ fieldset {
   margin-bottom: 44px;
   cursor: pointer;
 
-  @media (max-width: 767px) {
+  @media (max-width: 1366px) {
     display: none;
   }
 
@@ -328,7 +328,7 @@ fieldset {
 .complete-btn-mobile {
   display: none;
 
-  @media (max-width: 767px) {
+  @media (max-width: 1366px) {
     display: flex;
     align-items: center;
     gap: 8px;
@@ -368,7 +368,7 @@ fieldset {
   max-width: 320px;
   padding-top: 24px;
 
-  @media (max-width: 767px) {
+  @media (max-width: 1366px) {
     padding-inline: 10px;
     max-width: none;
   }
@@ -379,7 +379,7 @@ fieldset {
     color: #221227;
     margin: 0 0 16px 0;
 
-    @media (max-width: 767px) {
+    @media (max-width: 1366px) {
       margin: 0 0 24px 0;
     }
 
@@ -479,7 +479,7 @@ fieldset {
     transform: rotate(180deg);
   }
 
-  @media (max-width: 767px) {
+  @media (max-width: 1366px) {
     display: flex;
   }
 }

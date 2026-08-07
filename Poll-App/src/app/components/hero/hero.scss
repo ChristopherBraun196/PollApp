@@ -3,14 +3,19 @@
 .section-one {
   display: grid;
   grid-template-columns: auto auto;
-  justify-content: flex-start;
+  justify-content: center;
   grid-template-areas:
     'heading image'
     'text    image';
   column-gap: 220px;
   align-items: center;
 
-  @media (max-width: 767px) {
+  @media (max-width: 1000px) {
+    column-gap: 40px;
+    font-size: 4rem;
+  }
+
+  @media (max-width: 600px) {
     grid-template-columns: 1fr;
     justify-content: normal;
     grid-template-areas:
@@ -30,7 +35,15 @@ h1 {
     display: block;
     font-size: 6rem;
 
-    @media (max-width: 767px) {
+    @media (max-width: 1090px) {
+      font-size: 4.8rem;
+    }
+
+    @media (max-width: 1000px) {
+      font-size: 3.5rem;
+    }
+
+    @media (max-width: 600px) {
       font-size: 3.5rem;
     }
   }
@@ -42,11 +55,14 @@ h1 {
   p {
     color: #ffffff;
     font-family: 'Mulish';
-
     font-size: 20px;
     max-width: 570px;
 
-    @media (max-width: 767px) {
+    @media (max-width: 1000px) {
+      font-size: 17px;
+    }
+
+    @media (max-width: 600px) {
       font-size: 16px;
     }
   }
@@ -70,7 +86,7 @@ h1 {
   margin-top: 8px;
   transition: background-color 0.3s ease-in-out;
 
-  @media (max-width: 767px) {
+  @media (max-width: 600px) {
     margin: 36px auto 0;
     background-color: #d99a55;
   }
@@ -87,7 +103,7 @@ h1 {
       margin-left 0.25s ease-in-out,
       opacity 0.2s ease-in-out 0.15s;
 
-    @media (max-width: 767px) {
+    @media (max-width: 600px) {
       width: 20px;
       margin-left: 8px;
       opacity: 1;
@@ -139,7 +155,27 @@ h1 {
     opacity: 1;
   }
 
-  @media (max-width: 767px) {
+  @media (max-width: 1000px) {
+    height: 220px;
+    width: 140px;
+
+    img {
+      position: absolute;
+      top: -150px;
+      left: -95px;
+      height: 300px;
+    }
+
+    .phone {
+      opacity: 0;
+    }
+
+    .phone-hover {
+      opacity: 1;
+    }
+  }
+
+  @media (max-width: 600px) {
     justify-self: center;
     height: 220px;
     width: 200px;
